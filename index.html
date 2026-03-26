@@ -7,7 +7,7 @@
     <meta name="description" content="Clarisse Surin, candidate au Bâtonnat de Paris 2028. Rejoignez le mouvement. Prenez position.">
     <meta name="theme-color" content="#0c1525">
     <meta property="og:title" content="Clarisse Surin — Bâtonnat 2028">
-    <meta property="og:description" content="En position. Prête à courir. Rejoignez le mouvement pour le Barreau de Paris.">
+    <meta property="og:description" content="En position. Prête à mener. Rejoignez le mouvement pour le Barreau de Paris.">
     <meta property="og:image" content="https://res.cloudinary.com/dniurvpzd/image/upload/v1769084034/Clarisse_Surin_image_hero_jm89nm.webp">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -138,29 +138,15 @@
 
         /* ══════ BACKGROUND ILLUSTRATIONS ══════ */
 
-        /* Eiffel Tower SVG — subtle watermark */
-        .bg-eiffel {
-            position: absolute;
-            right: -5%;
-            bottom: -10%;
-            width: 45%;
-            max-width: 500px;
-            opacity: 0.06;
+        /* Background photo overlays */
+        .bg-photo {
+            position: absolute; inset: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             pointer-events: none;
             z-index: 0;
         }
-
-        .bg-eiffel svg { width: 100%; height: auto; }
-
-        /* Barreau scales SVG — watermark */
-        .bg-barreau {
-            position: absolute;
-            opacity: 0.05;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .bg-barreau svg { width: 100%; height: auto; }
 
         /* ══════ LOADER ══════ */
         #loader {
@@ -316,16 +302,18 @@
             z-index: 1;
         }
 
-        /* Eiffel tower silhouette in hero */
-        .hero-eiffel {
+        /* Hero background photo overlay (Tour Eiffel) */
+        .hero-photo-overlay {
             position: absolute;
-            right: 5%;
-            bottom: 0;
-            width: 320px;
-            z-index: 2;
-            opacity: 0.08;
+            right: 0; bottom: 0;
+            width: 50%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1549144511-f099e773c147?w=1200&q=80') center bottom/cover no-repeat;
+            opacity: 0.06;
             pointer-events: none;
-            filter: blur(0.5px);
+            z-index: 1;
+            filter: grayscale(20%);
+            mask-image: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
+            -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
         }
 
         .hero-inner {
@@ -884,7 +872,7 @@
             .temoignages-grid { grid-template-columns: 1fr; }
             .soutien-layout { grid-template-columns: 1fr; }
             .hero-bottom-row { flex-direction: column; gap: 20px; align-items: flex-start; }
-            .hero-eiffel { width: 220px; right: 2%; }
+            .hero-photo-overlay { width: 60%; opacity: 0.04; }
         }
         @media (max-width: 768px) {
             nav { padding: 18px 5vw; }
@@ -899,8 +887,7 @@
             .footer-links { flex-wrap: wrap; justify-content: center; }
             .soutien-metrics { flex-wrap: wrap; gap: 30px; }
             .hero-counter-block { display: none; }
-            .hero-eiffel { width: 160px; opacity: 0.05; }
-            .bg-eiffel { opacity: 0.03; }
+            .hero-photo-overlay { opacity: 0.04; }
         }
     </style>
 </head>
@@ -950,12 +937,8 @@
                  alt="Clarisse Surin" loading="eager" fetchpriority="high">
         </div>
 
-        <!-- Eiffel Tower silhouette -->
-        <div class="hero-eiffel" aria-hidden="true">
-            <svg viewBox="0 0 200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M100 0 L100 20 M85 60 L100 20 L115 60 M80 80 L120 80 M75 120 L85 80 M125 120 L115 80 M70 120 L130 120 M65 200 L75 120 M135 200 L125 120 M60 200 L140 200 M55 320 L65 200 M145 320 L135 200 M50 320 L150 320 M40 420 L55 320 M160 420 L145 320 M35 420 L165 420 M20 560 L40 420 M180 560 L160 420 M10 580 L20 560 M190 580 L180 560 M5 590 L195 590 M0 600 L200 600 M70 200 L130 200 M60 320 L140 320 M85 160 L115 160 M90 260 L110 260 M80 380 L120 380 M95 140 L105 140 M75 280 L125 280 M70 360 L130 360 M50 480 L150 480 M30 540 L170 540" stroke="currentColor" stroke-width="1.5" opacity="0.8" color="#c8a04a"/>
-            </svg>
-        </div>
+        <!-- Tour Eiffel photo overlay -->
+        <div class="hero-photo-overlay" aria-hidden="true"></div>
 
         <div class="hero-inner">
             <div class="hero-eyebrow" id="heroEye">
@@ -966,7 +949,7 @@
                 <span class="word"><span class="word-inner firstname" id="hw1">Clarisse</span></span>
                 <span class="word"><span class="word-inner lastname" id="hw2">Surin</span></span>
             </h1>
-            <p class="hero-subtitle" id="heroSub">En position. Prête à courir.</p>
+            <p class="hero-subtitle" id="heroSub">En position. Prête à mener.</p>
             <p class="hero-desc" id="heroDesc">
                 Avocate engagée, elle prend le starting bloc pour porter
                 la voix de tout le Barreau de Paris. Chaque avocat compte.
@@ -1023,36 +1006,8 @@
 
     <!-- ═══ VISION ═══ -->
     <section id="vision" class="section section--navy" style="position:relative;">
-        <!-- Barreau scales watermark -->
-        <div class="bg-barreau" style="left:-5%;top:10%;width:35%;max-width:400px;" aria-hidden="true">
-            <svg viewBox="0 0 300 350" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Balance / Scales of justice -->
-                <line x1="150" y1="30" x2="150" y2="280" stroke="#c8a04a" stroke-width="1.5"/>
-                <circle cx="150" cy="30" r="8" stroke="#c8a04a" stroke-width="1.2"/>
-                <!-- Left arm -->
-                <line x1="150" y1="50" x2="50" y2="90" stroke="#c8a04a" stroke-width="1.2"/>
-                <!-- Right arm -->
-                <line x1="150" y1="50" x2="250" y2="90" stroke="#c8a04a" stroke-width="1.2"/>
-                <!-- Left plate -->
-                <path d="M20 90 Q50 130 80 90" stroke="#c8a04a" stroke-width="1.2" fill="none"/>
-                <line x1="20" y1="90" x2="80" y2="90" stroke="#c8a04a" stroke-width="1"/>
-                <!-- Left chains -->
-                <line x1="30" y1="90" x2="50" y2="75" stroke="#c8a04a" stroke-width="0.8"/>
-                <line x1="70" y1="90" x2="50" y2="75" stroke="#c8a04a" stroke-width="0.8"/>
-                <!-- Right plate -->
-                <path d="M220 90 Q250 130 280 90" stroke="#c8a04a" stroke-width="1.2" fill="none"/>
-                <line x1="220" y1="90" x2="280" y2="90" stroke="#c8a04a" stroke-width="1"/>
-                <!-- Right chains -->
-                <line x1="230" y1="90" x2="250" y2="75" stroke="#c8a04a" stroke-width="0.8"/>
-                <line x1="270" y1="90" x2="250" y2="75" stroke="#c8a04a" stroke-width="0.8"/>
-                <!-- Base -->
-                <line x1="110" y1="280" x2="190" y2="280" stroke="#c8a04a" stroke-width="1.5"/>
-                <line x1="100" y1="290" x2="200" y2="290" stroke="#c8a04a" stroke-width="1.5"/>
-                <!-- Sword overlay -->
-                <line x1="150" y1="0" x2="150" y2="20" stroke="#c8a04a" stroke-width="2"/>
-                <line x1="140" y1="15" x2="160" y2="15" stroke="#c8a04a" stroke-width="1.5"/>
-            </svg>
-        </div>
+        <!-- Paris by night — background -->
+        <div class="bg-photo" style="background-image:url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1920&q=80');opacity:0.05;filter:grayscale(30%) brightness(0.7);" aria-hidden="true"></div>
 
         <div style="position:relative;z-index:1;">
             <div class="section-label" data-reveal>01 — Vision</div>
@@ -1115,12 +1070,7 @@
     <div id="engagements-wrap">
         <div class="track-lanes" aria-hidden="true"></div>
 
-        <!-- Eiffel in engagements background -->
-        <div class="bg-eiffel" aria-hidden="true">
-            <svg viewBox="0 0 200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M100 0 L100 20 M85 60 L100 20 L115 60 M80 80 L120 80 M75 120 L85 80 M125 120 L115 80 M70 120 L130 120 M65 200 L75 120 M135 200 L125 120 M60 200 L140 200 M55 320 L65 200 M145 320 L135 200 M50 320 L150 320 M40 420 L55 320 M160 420 L145 320 M35 420 L165 420 M20 560 L40 420 M180 560 L160 420 M10 580 L20 560 M190 580 L180 560 M5 590 L195 590 M0 600 L200 600 M70 200 L130 200 M60 320 L140 320 M85 160 L115 160 M90 260 L110 260 M80 380 L120 380 M95 140 L105 140 M75 280 L125 280 M70 360 L130 360 M50 480 L150 480 M30 540 L170 540" stroke="#c8a04a" stroke-width="1.5" opacity="0.8"/>
-            </svg>
-        </div>
+
 
         <div class="eng-header">
             <div class="section-label" data-reveal>03 — Starting Bloc</div>
@@ -1176,27 +1126,8 @@
 
     <!-- ═══ TÉMOIGNAGES ═══ -->
     <section id="temoignages" class="section section--navy" style="position:relative;">
-        <!-- Barreau scales watermark right -->
-        <div class="bg-barreau" style="right:-3%;top:15%;width:28%;max-width:320px;" aria-hidden="true">
-            <svg viewBox="0 0 300 350" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <line x1="150" y1="30" x2="150" y2="280" stroke="#c8a04a" stroke-width="1.5"/>
-                <circle cx="150" cy="30" r="8" stroke="#c8a04a" stroke-width="1.2"/>
-                <line x1="150" y1="50" x2="50" y2="90" stroke="#c8a04a" stroke-width="1.2"/>
-                <line x1="150" y1="50" x2="250" y2="90" stroke="#c8a04a" stroke-width="1.2"/>
-                <path d="M20 90 Q50 130 80 90" stroke="#c8a04a" stroke-width="1.2" fill="none"/>
-                <line x1="20" y1="90" x2="80" y2="90" stroke="#c8a04a" stroke-width="1"/>
-                <line x1="30" y1="90" x2="50" y2="75" stroke="#c8a04a" stroke-width="0.8"/>
-                <line x1="70" y1="90" x2="50" y2="75" stroke="#c8a04a" stroke-width="0.8"/>
-                <path d="M220 90 Q250 130 280 90" stroke="#c8a04a" stroke-width="1.2" fill="none"/>
-                <line x1="220" y1="90" x2="280" y2="90" stroke="#c8a04a" stroke-width="1"/>
-                <line x1="230" y1="90" x2="250" y2="75" stroke="#c8a04a" stroke-width="0.8"/>
-                <line x1="270" y1="90" x2="250" y2="75" stroke="#c8a04a" stroke-width="0.8"/>
-                <line x1="110" y1="280" x2="190" y2="280" stroke="#c8a04a" stroke-width="1.5"/>
-                <line x1="100" y1="290" x2="200" y2="290" stroke="#c8a04a" stroke-width="1.5"/>
-                <line x1="150" y1="0" x2="150" y2="20" stroke="#c8a04a" stroke-width="2"/>
-                <line x1="140" y1="15" x2="160" y2="15" stroke="#c8a04a" stroke-width="1.5"/>
-            </svg>
-        </div>
+        <!-- Pont Alexandre III — Paris doré -->
+        <div class="bg-photo" style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1920&q=80');opacity:0.045;filter:grayscale(20%) brightness(0.7);" aria-hidden="true"></div>
 
         <div style="position:relative;z-index:1;">
             <div class="section-label" data-reveal>04 — Ils soutiennent</div>
