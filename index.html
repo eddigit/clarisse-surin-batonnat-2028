@@ -1015,6 +1015,7 @@
             <li><a href="#parcours">Parcours</a></li>
             <li><a href="#engagements-wrap">Engagements</a></li>
             <li><a href="#temoignages">Soutiens</a></li>
+            <li><a href="soutiens.html">Mur des soutiens</a></li>
             <li><a href="#soutien" class="nav-cta">Rejoindre</a></li>
         </ul>
         <div class="burger" id="burger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
@@ -1324,6 +1325,7 @@
                 <a href="#vision">Vision</a>
                 <a href="#engagements-wrap">Engagements</a>
                 <a href="#soutien">Soutenir</a>
+                <a href="soutiens.html">Mur des soutiens</a>
                 <a href="https://www.cls-avocat.com" target="_blank" rel="noopener">Cabinet CLS</a>
             </div>
         </div>
@@ -1530,17 +1532,38 @@
             rObs.observe(rule);
         });
 
-        /* ══════ FORM ══════ */
+        /* ══════ FORM — SEND TO API ══════ */
+        const API_URL = 'https://api.mybotia.com/api/soutien';
         const form = document.getElementById('supportForm'), btn = document.getElementById('submitBtn');
+
+        /* Fetch real count on load */
+        fetch('https://api.mybotia.com/api/soutiens/count')
+            .then(r => r.json())
+            .then(d => { if (d.total) { hc.textContent = d.total; sc.textContent = d.total; } })
+            .catch(() => {});
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault(); btn.disabled = true; btn.querySelector('span').textContent = 'Envoi en cours…';
             try {
-                await new Promise(r => setTimeout(r, 1500));
+                const body = {};
+                new FormData(form).forEach((v, k) => { if (k !== 'rgpd') body[k] = v; });
+
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                const data = await res.json();
+
+                if (!res.ok) throw new Error(data.error || 'Erreur');
+
                 form.style.display = 'none';
                 document.getElementById('formSuccess').classList.add('show');
-                const n = SEED + 1; hc.textContent = n; sc.textContent = n;
-            } catch {
+                if (data.total) { animN(hc, data.total); animN(sc, data.total); }
+            } catch (err) {
+                console.error(err);
                 btn.disabled = false; btn.querySelector('span').textContent = 'Prendre position →';
+                alert('Une erreur est survenue. Veuillez réessayer.');
             }
         });
     })();
