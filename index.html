@@ -21,15 +21,15 @@
            Deep Navy + Gold
            ══════════════════════════════════════════ */
         :root {
-            /* Navy depths */
-            --navy-1: #080e1a;
-            --navy-2: #0c1525;
-            --navy-3: #101c30;
-            --navy-4: #162440;
-            --navy-5: #1c2e50;
-            --navy-6: #243860;
-            --navy-card: #0f1a2e;
-            --navy-card-hover: #142035;
+            /* Navy depths — lightened */
+            --navy-1: #0e1526;
+            --navy-2: #121d33;
+            --navy-3: #162540;
+            --navy-4: #1c2e50;
+            --navy-5: #243860;
+            --navy-6: #2c4270;
+            --navy-card: #152038;
+            --navy-card-hover: #1a2845;
             --navy-border: rgba(200, 175, 100, 0.08);
             --navy-border-hover: rgba(200, 175, 100, 0.18);
 
@@ -145,7 +145,7 @@
             bottom: -10%;
             width: 45%;
             max-width: 500px;
-            opacity: 0.025;
+            opacity: 0.06;
             pointer-events: none;
             z-index: 0;
         }
@@ -155,7 +155,7 @@
         /* Barreau scales SVG — watermark */
         .bg-barreau {
             position: absolute;
-            opacity: 0.02;
+            opacity: 0.05;
             pointer-events: none;
             z-index: 0;
         }
@@ -323,7 +323,7 @@
             bottom: 0;
             width: 320px;
             z-index: 2;
-            opacity: 0.04;
+            opacity: 0.08;
             pointer-events: none;
             filter: blur(0.5px);
         }
@@ -618,7 +618,19 @@
         .p-card p { font-size: var(--fs-s); color: var(--text-body); line-height: 1.8; }
 
         /* ══════ ENGAGEMENTS ══════ */
-        #engagements-wrap { position: relative; overflow: hidden; background: var(--navy-2); }
+        #engagements-wrap {
+            position: relative; overflow: hidden;
+            background: var(--navy-2);
+        }
+        #engagements-wrap::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: url('https://res.cloudinary.com/dniurvpzd/image/upload/v1774545636/ChatGPT_Image_26_mars_2026_18_18_31_satu1x.png') center/cover no-repeat;
+            opacity: 0.07;
+            pointer-events: none;
+            z-index: 0;
+            filter: grayscale(30%) brightness(0.8);
+        }
 
         .track-lanes {
             position: absolute; inset: 0; opacity: 0.02;
@@ -626,10 +638,11 @@
             pointer-events: none;
         }
 
-        .eng-header { padding: var(--s-2xl) 8vw var(--s-l); }
+        .eng-header { padding: var(--s-2xl) 8vw var(--s-l); position: relative; z-index: 1; }
 
         .eng-scroller {
             display: flex; gap: 20px; padding: 0 8vw var(--s-2xl);
+            position: relative; z-index: 1;
             overflow-x: auto; scroll-snap-type: x mandatory;
             scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab;
         }
@@ -668,7 +681,7 @@
         }
         .eng-card p { font-size: var(--fs-s); color: var(--text-body); line-height: 1.8; }
 
-        .scroll-prog-bar { width: 120px; height: 2px; background: var(--navy-4); margin: -40px 8vw 40px; position: relative; overflow: hidden; }
+        .scroll-prog-bar { width: 120px; height: 2px; background: var(--navy-4); margin: -40px 8vw 40px; position: relative; overflow: hidden; z-index: 1; }
         .scroll-prog-fill { height: 100%; width: 30%; background: var(--or); transition: transform 0.15s ease; }
 
         /* ══════ CITATION ══════ */
@@ -886,8 +899,8 @@
             .footer-links { flex-wrap: wrap; justify-content: center; }
             .soutien-metrics { flex-wrap: wrap; gap: 30px; }
             .hero-counter-block { display: none; }
-            .hero-eiffel { width: 160px; opacity: 0.025; }
-            .bg-eiffel { display: none; }
+            .hero-eiffel { width: 160px; opacity: 0.05; }
+            .bg-eiffel { opacity: 0.03; }
         }
     </style>
 </head>
