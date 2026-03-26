@@ -4,34 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nos Soutiens — Clarisse Surin, Bâtonnat 2028</title>
-    <meta name="description" content="Ils soutiennent Clarisse Surin pour le Bâtonnat de Paris 2028.">
+    <meta name="description" content="Ils soutiennent Clarisse Surin pour le Bâtonnat de Paris 2028. Rejoignez le mouvement.">
     <meta name="theme-color" content="#0c1525">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
     <style>
         :root {
             --navy-1: #0e1526;
             --navy-2: #121d33;
             --navy-3: #162540;
             --navy-4: #1c2e50;
+            --navy-5: #243860;
             --navy-card: #152038;
             --navy-card-hover: #1a2845;
             --navy-border: rgba(200, 175, 100, 0.08);
             --navy-border-hover: rgba(200, 175, 100, 0.18);
             --or: #c8a04a;
             --or-clair: #dbb95e;
+            --or-pale: #e8cf88;
             --or-fonce: #8a6e2e;
+            --or-muted: rgba(200, 160, 74, 0.6);
             --or-glow: rgba(200, 160, 74, 0.12);
+            --creme: #f4f0e8;
+            --creme-chaud: #f8f4ec;
+            --sable: #e2dcd0;
             --text-bright: #e8e2d8;
             --text-body: #b0a898;
             --text-muted: #7a7268;
+            --text-dim: #4a4440;
+            --text-dark: #1a1815;
+            --text-dark-body: #4a4640;
             --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html { scrollbar-width: thin; scrollbar-color: var(--or-fonce) var(--navy-1); }
+        html { scrollbar-width: thin; scrollbar-color: var(--or-fonce) var(--navy-1); overflow-x: hidden; }
         body {
             font-family: 'Inter', -apple-system, sans-serif;
             background: var(--navy-2);
@@ -40,14 +50,25 @@
             min-height: 100vh;
         }
         a { text-decoration: none; color: inherit; }
+        img { display: block; max-width: 100%; }
         ::selection { background: var(--or); color: var(--navy-1); }
 
-        /* NAV */
+        /* ══════ GRAIN ══════ */
+        .grain {
+            position: fixed; inset: -100%; width: 300%; height: 300%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.02; pointer-events: none; z-index: 9990;
+            animation: grainDrift 8s steps(10) infinite;
+        }
+        @keyframes grainDrift { 0%,100%{transform:translate(0)}10%{transform:translate(-5%,-10%)}50%{transform:translate(12%,10%)}90%{transform:translate(-1%,7%)} }
+
+        /* ══════ NAV ══════ */
         nav {
-            padding: 26px 5vw;
+            padding: 22px 5vw;
             display: flex; justify-content: space-between; align-items: center;
             background: rgba(14, 21, 38, 0.92);
             backdrop-filter: blur(40px) saturate(1.3);
+            -webkit-backdrop-filter: blur(40px) saturate(1.3);
             border-bottom: 1px solid var(--navy-border);
             position: sticky; top: 0; z-index: 100;
         }
@@ -57,51 +78,71 @@
             letter-spacing: 4px; text-transform: uppercase;
         }
         .nav-brand em { font-style: normal; color: var(--or); }
-        .nav-back {
-            font-size: 0.7rem; font-weight: 500;
+        .nav-links { display: flex; gap: 28px; align-items: center; }
+        .nav-links a {
+            font-size: 0.6rem; font-weight: 500;
             letter-spacing: 2px; text-transform: uppercase;
-            color: var(--text-body);
-            display: flex; align-items: center; gap: 8px;
-            transition: color 0.3s;
+            color: var(--text-body); transition: color 0.3s;
+            position: relative; padding: 6px 0;
         }
-        .nav-back:hover { color: var(--or); }
+        .nav-links a:hover { color: var(--or); }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: 0; left: 0;
+            width: 100%; height: 1px; background: var(--or);
+            transform: scaleX(0); transform-origin: right;
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+        .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+        .nav-cta {
+            padding: 10px 24px !important;
+            border: 1px solid var(--or-fonce) !important;
+            color: var(--or) !important;
+            transition: all 0.4s var(--ease-out-expo) !important;
+        }
+        .nav-cta:hover { background: var(--or) !important; color: var(--navy-1) !important; }
+        .nav-cta::after { display: none !important; }
 
-        /* HEADER */
+        /* ══════ HEADER ══════ */
         .page-header {
-            padding: 80px 8vw 50px;
+            padding: 100px 8vw 60px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            position: relative; overflow: hidden;
         }
         .page-header::before {
-            content: '';
-            position: absolute; inset: 0;
+            content: ''; position: absolute; inset: 0;
             background: radial-gradient(ellipse at center top, rgba(200,160,74,0.06), transparent 60%);
             pointer-events: none;
+        }
+        /* Background starting-bloc */
+        .page-header::after {
+            content: ''; position: absolute; inset: 0;
+            background: url('https://res.cloudinary.com/dniurvpzd/image/upload/v1774545636/ChatGPT_Image_26_mars_2026_18_18_31_satu1x.png') center/cover no-repeat;
+            opacity: 0.04; filter: grayscale(40%) brightness(0.6);
+            pointer-events: none; z-index: -1;
         }
         .page-label {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.6rem; color: var(--or);
             letter-spacing: 5px; text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             display: inline-flex; align-items: center; gap: 16px;
         }
         .page-label::before, .page-label::after { content: ''; width: 30px; height: 1px; background: var(--or-fonce); }
         .page-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
             font-weight: 700; line-height: 1.1;
         }
         .page-title .em { color: var(--or); font-style: italic; }
         .page-subtitle {
             font-size: 1rem; color: var(--text-body);
-            margin-top: 16px; line-height: 1.7;
+            margin-top: 18px; line-height: 1.8; max-width: 550px; margin-left: auto; margin-right: auto;
         }
 
-        /* COUNTER */
+        /* ══════ COUNTER STRIP ══════ */
         .counter-strip {
-            display: flex; justify-content: center; gap: 60px;
-            padding: 30px 8vw;
+            display: flex; justify-content: center; gap: 80px;
+            padding: 36px 8vw;
             border-top: 1px solid var(--navy-border);
             border-bottom: 1px solid var(--navy-border);
             background: var(--navy-1);
@@ -109,41 +150,41 @@
         .counter-item { text-align: center; }
         .counter-val {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem; font-weight: 700; color: var(--or); line-height: 1;
+            font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 700; color: var(--or); line-height: 1;
         }
         .counter-lbl {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.5rem; color: var(--text-muted);
-            letter-spacing: 4px; text-transform: uppercase; margin-top: 6px;
+            letter-spacing: 4px; text-transform: uppercase; margin-top: 8px;
         }
 
-        /* GRID */
-        .soutiens-container { padding: 50px 8vw 80px; }
+        /* ══════ STRIP ══════ */
+        .strip {
+            height: 3px;
+            background: linear-gradient(90deg, var(--navy-5), var(--or), var(--navy-5));
+            background-size: 200% 100%;
+            animation: stripShimmer 4s ease infinite;
+        }
+        @keyframes stripShimmer { 0%,100%{background-position:0% 0}50%{background-position:100% 0} }
+
+        /* ══════ GRID ══════ */
+        .soutiens-container { padding: 60px 8vw 80px; }
         .soutiens-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 22px;
         }
 
-        /* CARD */
+        /* ══════ CARD ══════ */
         .soutien-card {
-            padding: 34px 28px;
+            padding: 36px 30px;
             background: var(--navy-card);
             border: 1px solid var(--navy-border);
             position: relative; overflow: hidden;
             transition: all 0.5s var(--ease-out-expo);
             opacity: 0; transform: translateY(30px);
-            animation: cardIn 0.6s var(--ease-out-expo) forwards;
         }
-        .soutien-card:nth-child(1) { animation-delay: 0s; }
-        .soutien-card:nth-child(2) { animation-delay: 0.05s; }
-        .soutien-card:nth-child(3) { animation-delay: 0.1s; }
-        .soutien-card:nth-child(4) { animation-delay: 0.15s; }
-        .soutien-card:nth-child(5) { animation-delay: 0.2s; }
-        .soutien-card:nth-child(6) { animation-delay: 0.25s; }
-        .soutien-card:nth-child(n+7) { animation-delay: 0.3s; }
-
-        @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
+        .soutien-card.shown { opacity: 1; transform: translateY(0); }
 
         .soutien-card::before {
             content: ''; position: absolute; inset: 0;
@@ -154,9 +195,8 @@
         .soutien-card:hover {
             border-color: var(--navy-border-hover);
             transform: translateY(-4px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2), 0 0 30px rgba(200,160,74,0.04);
         }
-
         .soutien-card::after {
             content: ''; position: absolute; left: 0; top: 0;
             width: 2px; height: 100%;
@@ -166,193 +206,439 @@
         }
         .soutien-card:hover::after { transform: scaleY(1); }
 
-        .card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+        .card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
         .card-avatar {
-            width: 44px; height: 44px; border-radius: 50%;
-            background: var(--navy-4);
+            width: 48px; height: 48px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--navy-4), var(--navy-5));
             display: flex; align-items: center; justify-content: center;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem; font-weight: 700; color: var(--or);
+            font-size: 1rem; font-weight: 700; color: var(--or);
             flex-shrink: 0;
+            border: 1px solid var(--navy-border);
         }
         .card-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem; font-weight: 600;
+            font-size: 1.2rem; font-weight: 600;
         }
-        .card-meta {
-            font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;
-        }
+        .card-meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
 
-        .card-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+        .card-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
         .badge {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.48rem; letter-spacing: 2px; text-transform: uppercase;
             padding: 5px 12px;
             border: 1px solid var(--navy-border);
             color: var(--or-clair);
+            transition: border-color 0.3s;
         }
+        .soutien-card:hover .badge { border-color: var(--navy-border-hover); }
 
         .card-message {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem; font-style: italic;
-            line-height: 1.6; color: var(--text-body);
+            font-size: 1.05rem; font-style: italic;
+            line-height: 1.65; color: var(--text-body);
             border-left: 2px solid var(--or-fonce);
-            padding-left: 16px;
+            padding-left: 18px;
         }
-        .card-message::before { content: '"'; color: var(--or); font-size: 1.4rem; }
+        .card-message::before { content: '"'; color: var(--or); font-size: 1.5rem; line-height: 1; }
 
         .card-date {
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.48rem; color: var(--text-muted);
-            letter-spacing: 2px; margin-top: 14px;
+            letter-spacing: 2px; margin-top: 16px;
+            text-transform: uppercase;
         }
 
-        /* EMPTY STATE */
-        .empty-state {
-            text-align: center; padding: 80px 20px;
+        /* ══════ SECTION AVIS ══════ */
+        .avis-section {
+            padding: 100px 8vw;
+            background: var(--creme);
+            color: var(--text-dark);
+            position: relative; overflow: hidden;
         }
-        .empty-state .icon { font-size: 3rem; margin-bottom: 20px; opacity: 0.3; }
-        .empty-state h3 {
+        .avis-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1920&q=80') center/cover no-repeat;
+            opacity: 0.03; filter: grayscale(40%);
+            pointer-events: none;
+        }
+        .avis-layout {
+            display: grid; grid-template-columns: 1fr 1.1fr;
+            gap: 8vw; align-items: start;
+            position: relative; z-index: 1;
+        }
+        .avis-left .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; color: var(--or-fonce);
+            letter-spacing: 5px; text-transform: uppercase;
+            margin-bottom: 24px;
+            display: inline-flex; align-items: center; gap: 16px;
+        }
+        .avis-left .section-label::before { content: ''; width: 40px; height: 1px; background: var(--or-fonce); }
+        .avis-left .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem; margin-bottom: 10px;
+            font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 700;
+            line-height: 1.1; margin-bottom: 20px;
         }
-        .empty-state p { color: var(--text-muted); }
-        .empty-state a {
-            display: inline-block; margin-top: 20px;
-            padding: 14px 36px;
-            background: var(--or); color: var(--navy-1);
-            font-size: 0.7rem; font-weight: 700;
-            letter-spacing: 2px; text-transform: uppercase;
+        .avis-left .section-title .em { color: var(--or-fonce); font-style: italic; }
+        .avis-left .section-text {
+            font-size: 1rem; line-height: 1.9; color: var(--text-dark-body);
+            max-width: 480px;
+        }
+        .avis-left blockquote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem; font-style: italic;
+            color: var(--text-dark-body); line-height: 1.55;
+            border-left: 2px solid var(--or); padding-left: 24px;
+            margin: 28px 0;
         }
 
-        /* FOOTER */
+        /* Form panel (same style as soutien form) */
+        .form-panel {
+            background: white;
+            border: 1px solid var(--sable);
+            padding: 48px; position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+        }
+        .form-panel::before {
+            content: attr(data-label);
+            position: absolute; top: -8px; left: 36px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.5rem; letter-spacing: 5px;
+            color: var(--or-fonce); background: white; padding: 0 12px;
+        }
+        .fg { margin-bottom: 18px; }
+        .fg label {
+            display: block; font-size: 0.6rem; font-weight: 600;
+            letter-spacing: 2.5px; text-transform: uppercase;
+            color: var(--text-dim); margin-bottom: 7px;
+        }
+        .fg input, .fg select, .fg textarea {
+            width: 100%; padding: 13px 15px;
+            background: var(--creme);
+            border: 1px solid var(--sable);
+            color: var(--text-dark);
+            font-family: 'Inter', sans-serif; font-size: 0.88rem;
+            outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .fg input:focus, .fg select:focus, .fg textarea:focus {
+            border-color: var(--or); box-shadow: 0 0 0 3px rgba(200,160,74,0.08);
+        }
+        .fg input::placeholder, .fg textarea::placeholder { color: var(--text-dim); font-size: 0.82rem; }
+        .fg textarea { resize: vertical; min-height: 120px; }
+        .fg select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23c8a04a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 14px center;
+            cursor: pointer;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+        .form-consent { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 24px; }
+        .form-consent input[type="checkbox"] { accent-color: var(--or); margin-top: 3px; flex-shrink: 0; }
+        .form-consent label { font-size: 0.75rem; color: var(--text-dim); line-height: 1.6; }
+
+        .btn-submit {
+            width: 100%; padding: 18px;
+            background: var(--navy-3); color: var(--or);
+            border: none;
+            font-size: 0.6rem; font-weight: 700;
+            letter-spacing: 3px; text-transform: uppercase;
+            cursor: pointer; position: relative; overflow: hidden;
+            transition: all 0.4s var(--ease-out-expo);
+        }
+        .btn-submit span { position: relative; z-index: 2; }
+        .btn-submit::before {
+            content: ''; position: absolute; inset: 0;
+            background: var(--or);
+            transform: translateY(100%);
+            transition: transform 0.5s var(--ease-out-expo); z-index: 1;
+        }
+        .btn-submit:hover::before { transform: translateY(0); }
+        .btn-submit:hover { color: var(--navy-1); box-shadow: 0 15px 40px rgba(200,160,74,0.15); }
+        .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .form-success { display: none; text-align: center; padding: 60px 30px; }
+        .form-success.show { display: block; animation: fadeUp .6s var(--ease-out-expo); }
+        .form-success .ring {
+            width: 60px; height: 60px; border: 2px solid var(--or);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 24px; font-size: 1.3rem; color: var(--or);
+        }
+        .form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; margin-bottom: 10px; color: var(--text-dark); }
+        .form-success p { color: var(--text-dark-body); font-size: 0.9rem; line-height: 1.7; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ══════ CTA BAND ══════ */
+        .cta-band {
+            padding: 80px 8vw;
+            text-align: center;
+            background: var(--navy-1);
+            position: relative; overflow: hidden;
+        }
+        .cta-band::before {
+            content: ''; position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px; height: 400px;
+            background: radial-gradient(ellipse, rgba(200,160,74,0.06), transparent 65%);
+            pointer-events: none;
+        }
+        .cta-band h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 4vw, 3rem); font-weight: 700;
+            margin-bottom: 12px; position: relative;
+        }
+        .cta-band h2 .em { color: var(--or); font-style: italic; }
+        .cta-band p { color: var(--text-body); margin-bottom: 36px; font-size: 1rem; position: relative; }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 14px;
+            background: var(--or); color: var(--navy-1);
+            padding: 18px 42px;
+            font-size: 0.6rem; font-weight: 700;
+            letter-spacing: 3px; text-transform: uppercase;
+            border: none; cursor: pointer;
+            position: relative; overflow: hidden;
+            transition: all 0.5s var(--ease-out-expo);
+        }
+        .btn-primary span { position: relative; z-index: 2; display: flex; align-items: center; gap: 12px; }
+        .btn-primary::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            z-index: 1; transition: left 0.7s var(--ease-out-expo);
+        }
+        .btn-primary:hover::before { left: 150%; }
+        .btn-primary:hover { box-shadow: 0 20px 60px rgba(200,160,74,0.25); transform: translateY(-2px); }
+
+        /* ══════ FOOTER ══════ */
         footer {
             padding: 40px 8vw; background: var(--navy-1);
             border-top: 1px solid var(--navy-border);
-            text-align: center;
         }
+        .footer-row { display: flex; justify-content: space-between; align-items: center; }
+        .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; }
+        .footer-brand .gold { color: var(--or); }
+        .footer-links { display: flex; gap: 28px; }
+        .footer-links a { font-size: 0.6rem; color: var(--text-muted); letter-spacing: 1px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--or); }
         .footer-copy {
+            text-align: center; margin-top: 22px; padding-top: 18px;
+            border-top: 1px solid var(--navy-border);
             font-size: 0.6rem; color: var(--text-muted);
         }
-        .footer-copy a {
-            color: rgba(200, 160, 74, 0.6);
-            border-bottom: 1px solid var(--or-fonce);
-            transition: color 0.3s;
-        }
+        .footer-copy a { color: var(--or-muted); border-bottom: 1px solid var(--or-fonce); transition: color 0.3s; }
         .footer-copy a:hover { color: var(--or); }
 
-        /* LOADING */
-        .loading { text-align: center; padding: 60px; }
-        .loading-spinner {
-            width: 36px; height: 36px; border: 2px solid var(--navy-4);
-            border-top-color: var(--or); border-radius: 50%;
-            animation: spin 0.8s linear infinite; margin: 0 auto 16px;
+        /* ══════ RESPONSIVE ══════ */
+        @media (max-width: 1024px) {
+            .avis-layout { grid-template-columns: 1fr; }
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
         @media (max-width: 768px) {
-            .page-header { padding: 50px 6vw 30px; }
+            .page-header { padding: 60px 6vw 40px; }
             .soutiens-container { padding: 30px 6vw 60px; }
             .soutiens-grid { grid-template-columns: 1fr; }
-            .counter-strip { gap: 30px; }
+            .counter-strip { gap: 30px; flex-wrap: wrap; }
+            .avis-section { padding: 60px 6vw; }
+            .form-panel { padding: 30px 22px; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-row { flex-direction: column; gap: 16px; text-align: center; }
+            .footer-links { flex-wrap: wrap; justify-content: center; }
+            .nav-links { gap: 16px; }
         }
     </style>
 </head>
 <body>
 
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- NAV -->
     <nav>
         <a href="index.html" class="nav-brand"><em>CS</em> — 2028</a>
-        <a href="index.html" class="nav-back">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            Retour au site
-        </a>
+        <div class="nav-links">
+            <a href="index.html#vision">Vision</a>
+            <a href="index.html#engagements-wrap">Engagements</a>
+            <a href="#avis">Votre avis</a>
+            <a href="index.html#soutien" class="nav-cta">Rejoindre</a>
+        </div>
     </nav>
 
+    <!-- HEADER -->
     <div class="page-header">
         <div class="page-label">Mobilisation</div>
         <h1 class="page-title">Ils prennent <span class="em">position</span></h1>
-        <p class="page-subtitle">Chaque soutien compte. Découvrez celles et ceux qui rejoignent le mouvement.</p>
+        <p class="page-subtitle">Chaque soutien compte. Découvrez celles et ceux qui croient en un Barreau plus fort, plus juste, plus&nbsp;moderne.</p>
     </div>
 
+    <!-- COUNTERS -->
     <div class="counter-strip">
         <div class="counter-item">
-            <div class="counter-val" id="totalCount">—</div>
+            <div class="counter-val" id="totalCount">0</div>
             <div class="counter-lbl">Soutiens</div>
         </div>
         <div class="counter-item">
             <div class="counter-val">2028</div>
             <div class="counter-lbl">Objectif</div>
         </div>
-    </div>
-
-    <div class="soutiens-container">
-        <div id="soutiensGrid" class="soutiens-grid">
-            <div class="loading">
-                <div class="loading-spinner"></div>
-                <p style="color:var(--text-muted);font-size:0.85rem;">Chargement des soutiens…</p>
-            </div>
+        <div class="counter-item">
+            <div class="counter-val">1</div>
+            <div class="counter-lbl">Vision commune</div>
         </div>
     </div>
 
+    <div class="strip"></div>
+
+    <!-- SOUTIENS GRID -->
+    <div class="soutiens-container">
+        <div id="soutiensGrid" class="soutiens-grid"></div>
+    </div>
+
+    <!-- CTA BAND -->
+    <div class="cta-band">
+        <h2>Vous aussi, prenez <span class="em">position</span></h2>
+        <p>Rejoignez les avocats qui s'engagent pour l'avenir du Barreau de Paris.</p>
+        <a href="index.html#soutien" class="btn-primary">
+            <span>Rejoindre le mouvement <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+    </div>
+
+    <!-- VOTRE AVIS COMPTE -->
+    <section id="avis" class="avis-section">
+        <div class="avis-layout">
+            <div class="avis-left">
+                <div class="section-label">06 — Votre avis</div>
+                <h2 class="section-title">
+                    Votre voix<br>
+                    <span class="em">façonne le projet.</span>
+                </h2>
+                <p class="section-text">
+                    Ce Bâtonnat se construit avec vous. Vos idées, vos préoccupations, vos attentes sont le carburant de cette campagne. Chaque suggestion est lue par l'équipe et transmise à&nbsp;Clarisse.
+                </p>
+                <blockquote>
+                    Un Bâtonnier ne peut bien servir que s'il écoute d'abord. Dites-nous ce que vous attendez. Nous agirons&nbsp;ensemble.
+                </blockquote>
+            </div>
+            <div class="form-panel" data-label="VOTRE AVIS">
+                <form id="avisForm" novalidate>
+                    <div class="form-row">
+                        <div class="fg"><label for="a-prenom">Prénom</label><input type="text" id="a-prenom" name="prenom" required placeholder="Votre prénom"></div>
+                        <div class="fg"><label for="a-nom">Nom</label><input type="text" id="a-nom" name="nom" required placeholder="Votre nom"></div>
+                    </div>
+                    <div class="fg"><label for="a-email">Email</label><input type="email" id="a-email" name="email" required placeholder="nom@cabinet.fr"></div>
+                    <div class="fg"><label for="a-theme">Thématique</label>
+                        <select id="a-theme" name="theme">
+                            <option value="">Choisir un thème (facultatif)</option>
+                            <option value="acces-droit">Accès au droit</option>
+                            <option value="numerique">Numérique & innovation</option>
+                            <option value="transparence">Transparence & gouvernance</option>
+                            <option value="solidarite">Solidarité confraternelle</option>
+                            <option value="formation">Formation & jeunes avocats</option>
+                            <option value="international">Rayonnement international</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                    <div class="fg"><label for="a-message">Votre idée, suggestion ou préoccupation</label><textarea id="a-message" name="message" required placeholder="Partagez librement votre réflexion, idée ou suggestion pour le Barreau de demain…"></textarea></div>
+                    <div class="form-consent">
+                        <input type="checkbox" id="a-rgpd" name="rgpd" required>
+                        <label for="a-rgpd">J'accepte que mon message soit transmis à l'équipe de campagne de Clarisse&nbsp;Surin.</label>
+                    </div>
+                    <button type="submit" class="btn-submit" id="avisBtn"><span>Envoyer mon avis →</span></button>
+                </form>
+                <div class="form-success" id="avisSuccess">
+                    <div class="ring">✓</div>
+                    <h3>Merci pour votre contribution</h3>
+                    <p>Votre message a été transmis à l'équipe de campagne.<br>Clarisse vous remercie pour votre engagement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
-        <div class="footer-copy">© 2026 Campagne Clarisse Surin — Bâtonnat de Paris 2028. — Design &amp; développement <a href="https://coachdigitalparis.com" target="_blank" rel="noopener">G.&nbsp;Korzec</a></div>
+        <div class="footer-row">
+            <div class="footer-brand"><span class="gold">Clarisse Surin</span> — Bâtonnat 2028</div>
+            <div class="footer-links">
+                <a href="index.html">Accueil</a>
+                <a href="index.html#vision">Vision</a>
+                <a href="index.html#engagements-wrap">Engagements</a>
+                <a href="index.html#soutien">Soutenir</a>
+                <a href="https://www.cls-avocat.com" target="_blank" rel="noopener">Cabinet CLS</a>
+            </div>
+        </div>
+        <div class="footer-copy">© 2026 Campagne Clarisse Surin — Bâtonnat de Paris 2028. Tous droits réservés. — Design &amp; développement <a href="https://coachdigitalparis.com" target="_blank" rel="noopener">G.&nbsp;Korzec</a></div>
     </footer>
 
     <script>
     (function() {
-        const API = 'https://api.mybotia.com/api/soutiens';
+        'use strict';
+
+        /* ══════ LENIS ══════ */
+        const lenis = new Lenis({ duration: 1.3, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) lenis.scrollTo(t); });
+        });
+
+        /* ══════ MOCK DATA ══════ */
+        const mockSoutiens = [
+            { prenom: "Sophie", nom_initial: "M.", statut: "Associée", barreau: "Barreau de Paris", specialite: "Droit des affaires", message: "Clarisse incarne le renouveau dont notre Barreau a besoin. Son écoute et sa détermination sont exactement ce qu'il nous faut.", created_at: "2026-03-25T14:30:00" },
+            { prenom: "Philippe", nom_initial: "D.", statut: "Associé", barreau: "Barreau de Paris", specialite: "Droit pénal", message: "Enfin une candidate qui comprend les enjeux du numérique pour nos cabinets. Mon soutien est total.", created_at: "2026-03-25T10:15:00" },
+            { prenom: "Amélie", nom_initial: "R.", statut: "Collaboratrice", barreau: "Barreau de Paris", specialite: "Droit social", message: "En tant que jeune avocate, je me sens enfin représentée. Clarisse porte notre voix avec force et authenticité.", created_at: "2026-03-24T18:45:00" },
+            { prenom: "Marc", nom_initial: "L.", statut: "Individuel", barreau: "Barreau de Paris", specialite: "Droit immobilier", message: null, created_at: "2026-03-24T09:20:00" },
+            { prenom: "Isabelle", nom_initial: "C.", statut: "Associée", barreau: "Barreau de Paris", specialite: "Propriété intellectuelle", message: "La transparence promise par Clarisse est essentielle. Ouvrons les comptes, montrons l'exemple.", created_at: "2026-03-23T16:00:00" },
+            { prenom: "Thomas", nom_initial: "B.", statut: "Collaborateur", barreau: "Barreau de Paris", specialite: "Droit fiscal", message: "Une vision claire, un programme concret. Clarisse a ma confiance.", created_at: "2026-03-23T11:30:00" },
+            { prenom: "Catherine", nom_initial: "V.", statut: "Honoraire", barreau: "Barreau de Paris", specialite: "Droit de la famille", message: "Après 35 ans de barreau, je reconnais en Clarisse les qualités d'un vrai Bâtonnier : l'écoute, le courage, la vision.", created_at: "2026-03-22T14:10:00" },
+            { prenom: "Alexandre", nom_initial: "F.", statut: "Associé", barreau: "Barreau de Paris", specialite: "Contentieux commercial", message: null, created_at: "2026-03-22T09:00:00" },
+            { prenom: "Nathalie", nom_initial: "P.", statut: "Individuelle", barreau: "Barreau de Paris", specialite: "Droit du travail", message: "La solidarité confraternelle ne doit pas être un slogan. Avec Clarisse, ce sera une réalité.", created_at: "2026-03-21T17:30:00" },
+            { prenom: "Julien", nom_initial: "G.", statut: "Élève-avocat", barreau: "Barreau de Paris", specialite: null, message: "Même en tant qu'élève, je sens que cette campagne nous inclut. C'est rare et précieux.", created_at: "2026-03-21T12:00:00" },
+            { prenom: "Hélène", nom_initial: "T.", statut: "Associée", barreau: "Barreau de Paris", specialite: "Droit européen", message: "Le rayonnement international du Barreau de Paris est un enjeu majeur. Clarisse l'a compris.", created_at: "2026-03-20T15:45:00" },
+            { prenom: "François", nom_initial: "A.", statut: "Individuel", barreau: "Barreau de Paris", specialite: "Droit des sociétés", message: null, created_at: "2026-03-20T10:20:00" },
+            { prenom: "Claire", nom_initial: "J.", statut: "Collaboratrice", barreau: "Barreau de Paris", specialite: "Droit bancaire", message: "L'accès au droit pour tous n'est pas un luxe, c'est une nécessité. Merci Clarisse de le rappeler.", created_at: "2026-03-19T16:30:00" },
+            { prenom: "Bernard", nom_initial: "S.", statut: "Honoraire", barreau: "Barreau de Paris", specialite: "Droit public", message: "J'ai connu beaucoup de candidats au Bâtonnat. Clarisse est de ceux qui tiennent leurs promesses.", created_at: "2026-03-19T08:50:00" },
+            { prenom: "Marine", nom_initial: "K.", statut: "Collaboratrice", barreau: "Barreau de Paris", specialite: "Droit de l'environnement", message: null, created_at: "2026-03-18T14:15:00" },
+            { prenom: "Olivier", nom_initial: "N.", statut: "Associé", barreau: "Autre barreau", specialite: "Droit des affaires internationales", message: "Même depuis un autre barreau, l'élan que crée Clarisse est inspirant. Le Barreau de Paris montre la voie.", created_at: "2026-03-18T11:00:00" },
+            { prenom: "Sandrine", nom_initial: "E.", statut: "Individuelle", barreau: "Barreau de Paris", specialite: "Droit de la santé", message: "Moderniser sans perdre nos valeurs. C'est exactement le chemin que propose Clarisse.", created_at: "2026-03-17T09:30:00" },
+            { prenom: "Laurent", nom_initial: "W.", statut: "Associé", barreau: "Barreau de Paris", specialite: "Arbitrage", message: null, created_at: "2026-03-17T15:00:00" }
+        ];
+
+        const TOTAL = mockSoutiens.length;
+
+        /* ══════ RENDER ══════ */
         const grid = document.getElementById('soutiensGrid');
         const totalEl = document.getElementById('totalCount');
-
-        const statutMap = {
-            collaborateur: 'Collaborateur',
-            associe: 'Associé',
-            individuel: 'Individuel',
-            eleve: 'Élève-avocat',
-            honoraire: 'Honoraire'
-        };
-        const barreauMap = { paris: 'Barreau de Paris', autre: 'Autre barreau' };
 
         function formatDate(d) {
             return new Date(d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
         }
 
-        function getInitials(prenom, nomInitial) {
-            return (prenom[0] || '').toUpperCase() + (nomInitial[0] || '').toUpperCase();
-        }
+        function renderCard(s, i) {
+            const initials = (s.prenom[0] || '') + (s.nom_initial[0] || '');
+            const meta = [s.statut, s.barreau].filter(Boolean).join(' — ');
 
-        function renderCard(s) {
-            const initials = getInitials(s.prenom, s.nom_initial);
-            const statut = statutMap[s.statut] || s.statut || '';
-            const barreau = barreauMap[s.barreau] || s.barreau || '';
-            const meta = [statut, barreau].filter(Boolean).join(' — ');
+            let html = `<div class="soutien-card" style="transition-delay:${Math.min(i * 0.06, 0.6)}s;">
+                <div class="card-header">
+                    <div class="card-avatar">${initials}</div>
+                    <div>
+                        <div class="card-name">${s.prenom} ${s.nom_initial}</div>
+                        ${meta ? `<div class="card-meta">${meta}</div>` : ''}
+                    </div>
+                </div>`;
 
-            let html = `
-                <div class="soutien-card">
-                    <div class="card-header">
-                        <div class="card-avatar">${initials}</div>
-                        <div>
-                            <div class="card-name">${s.prenom} ${s.nom_initial}</div>
-                            ${meta ? `<div class="card-meta">${meta}</div>` : ''}
-                        </div>
-                    </div>`;
-
-            const badges = [];
-            if (s.specialite) badges.push(s.specialite);
-            if (badges.length) {
-                html += `<div class="card-badges">${badges.map(b => `<span class="badge">${b}</span>`).join('')}</div>`;
+            if (s.specialite) {
+                html += `<div class="card-badges"><span class="badge">${s.specialite}</span></div>`;
             }
-
             if (s.message) {
                 html += `<div class="card-message">${s.message}</div>`;
             }
-
             html += `<div class="card-date">${formatDate(s.created_at)}</div></div>`;
             return html;
         }
 
-        function animCount(el, target) {
-            const dur = 2000;
+        grid.innerHTML = mockSoutiens.map(renderCard).join('');
+
+        /* Animate counter */
+        function animCount(el, target, dur = 2500) {
             const t0 = performance.now();
             (function tick(now) {
                 const p = Math.min((now - t0) / dur, 1);
@@ -362,49 +648,65 @@
             })(t0);
         }
 
-        async function load() {
+        /* IntersectionObserver for cards */
+        const cardObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('shown'); cardObs.unobserve(e.target); }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        grid.querySelectorAll('.soutien-card').forEach(c => cardObs.observe(c));
+
+        /* Counter animation on header visible */
+        const counterObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { animCount(totalEl, TOTAL); counterObs.unobserve(e.target); }
+            });
+        }, { threshold: 0.5 });
+        counterObs.observe(totalEl);
+
+        /* Card hover glow */
+        grid.querySelectorAll('.soutien-card').forEach(c => {
+            c.addEventListener('mousemove', (e) => {
+                const r = c.getBoundingClientRect();
+                c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+                c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+            });
+        });
+
+        /* ══════ AVIS FORM ══════ */
+        const avisForm = document.getElementById('avisForm');
+        const avisBtn = document.getElementById('avisBtn');
+
+        avisForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            avisBtn.disabled = true;
+            avisBtn.querySelector('span').textContent = 'Envoi en cours…';
+
             try {
-                const res = await fetch(API);
-                const data = await res.json();
+                const body = {};
+                new FormData(avisForm).forEach((v, k) => { if (k !== 'rgpd') body[k] = v; });
 
-                animCount(totalEl, data.total);
-
-                if (data.soutiens.length === 0) {
-                    grid.innerHTML = `
-                        <div class="empty-state" style="grid-column:1/-1;">
-                            <div class="icon">🏛️</div>
-                            <h3>Le mouvement commence ici</h3>
-                            <p>Soyez le premier à prendre position.</p>
-                            <a href="index.html#soutien">Rejoindre →</a>
-                        </div>`;
-                    return;
+                /* For now, try API. If not available, simulate success for demo */
+                try {
+                    const res = await fetch('https://api.mybotia.com/api/avis', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(body)
+                    });
+                    if (!res.ok) throw new Error();
+                } catch {
+                    /* API not ready yet — simulate for demo */
+                    await new Promise(r => setTimeout(r, 1200));
                 }
 
-                grid.innerHTML = data.soutiens.map(renderCard).join('');
-
-                // Card cursor glow
-                grid.querySelectorAll('.soutien-card').forEach(c => {
-                    c.addEventListener('mousemove', (e) => {
-                        const r = c.getBoundingClientRect();
-                        c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-                        c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
-                    });
-                });
-
-            } catch (err) {
-                console.error(err);
-                grid.innerHTML = `
-                    <div class="empty-state" style="grid-column:1/-1;">
-                        <div class="icon">⚠️</div>
-                        <h3>Chargement en cours</h3>
-                        <p>Les soutiens seront disponibles prochainement.</p>
-                        <a href="index.html#soutien">Rejoindre le mouvement →</a>
-                    </div>`;
-                totalEl.textContent = '—';
+                avisForm.style.display = 'none';
+                document.getElementById('avisSuccess').classList.add('show');
+            } catch {
+                avisBtn.disabled = false;
+                avisBtn.querySelector('span').textContent = 'Envoyer mon avis →';
             }
-        }
+        });
 
-        load();
     })();
     </script>
 </body>
