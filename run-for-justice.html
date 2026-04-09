@@ -811,8 +811,8 @@
        RUN FOR JUSTICE — FORM LOGIC
        ══════════════════════════════════════════ */
 
-    // ── Google Apps Script endpoint ──
-    const APPS_SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL_HERE";
+    // ── API endpoint ──
+    const API_URL = "https://api-batonnat.mybotia.com/api/soutien";
 
     // ── DOM refs ──
     const form = document.getElementById('campaign-form');
@@ -994,46 +994,41 @@
         submitBtn.disabled = true;
 
         try {
-            const formData = new FormData(form);
+            const payload = {
+                nom: document.getElementById('nom').value.trim(),
+                prenom: document.getElementById('prenom').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                statut: document.querySelector('input[name="statut"]:checked').value,
+                barreau: document.getElementById('barreau').value.trim(),
+                message: document.getElementById('message').value.trim() || null,
+                participation_campagne: participationCb.checked ? 'oui' : '',
+                soutien_candidat: soutienCb.checked ? 'oui' : '',
+                souhaite_partager_theme: themeCb.checked ? 'oui' : '',
+                source: 'run-for-justice'
+            };
 
-            // Ensure unchecked values are empty strings
-            if (!participationCb.checked) formData.set('participation_campagne', '');
-            if (!soutienCb.checked) formData.set('soutien_candidat', '');
-            if (!themeCb.checked) formData.set('souhaite_partager_theme', '');
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
 
-            let success = false;
+            const data = await response.json();
 
-            if (APPS_SCRIPT_URL.includes('PASTE_YOUR')) {
-                // Demo mode: simulate success
-                await new Promise(resolve => setTimeout(resolve, 1200));
-                success = true;
-            } else {
-                // Real submission to Google Apps Script
-                const response = await fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                // Apps Script may return text or JSON
-                const contentType = response.headers.get('content-type') || '';
-                if (contentType.includes('application/json')) {
-                    const data = await response.json();
-                    success = data.success === true;
-                    if (!success) throw new Error(data.message || 'Erreur serveur');
-                } else {
-                    const text = await response.text();
-                    // Accept any 2xx or truthy text response
-                    success = response.ok || text.toLowerCase().includes('success');
-                }
+            if (!response.ok) {
+                throw new Error(data.error || 'Erreur serveur');
             }
 
-            if (success) {
+            if (data.success) {
                 showConfirmation();
             }
 
         } catch (err) {
             console.error('Submit error:', err);
-            errorBanner.textContent = 'Une erreur est survenue. Veuillez reessayer.';
+            const msg = err.message.includes('adresse email')
+                ? 'Vous avez deja soumis votre soutien avec cette adresse email.'
+                : 'Une erreur est survenue. Veuillez reessayer.';
+            errorBanner.textContent = msg;
             errorBanner.classList.add('visible');
         } finally {
             submitBtn.classList.remove('loading');
@@ -1066,79 +1061,9 @@
 </script>
 
 <!--
-══════════════════════════════════════════════════════════════
-   GOOGLE SHEETS INTEGRATION — GUIDE DEPLOIEMENT
-══════════════════════════════════════════════════════════════
-
-   1. EN-TETES LIGNE 1 DE LA FEUILLE "Reponses" :
-   ─────────────────────────────────────────────────
-   date_reception | nom | prenom | statut | barreau | email | participation_campagne | soutien_candidat | souhaite_partager_theme | message | source | timestamp_client
-
-
-   2. APPS SCRIPT — doPost(e) :
-   ─────────────────────────────
-   Coller dans Extensions > Apps Script du Google Sheet :
-
-   function doPost(e) {
-     try {
-       const SHEET_NAME = 'Reponses';
-       const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
-       const data = e.parameter || {};
-
-       if (!sheet) {
-         throw new Error('Feuille "Reponses" introuvable');
-       }
-
-       if (!data.nom || !data.prenom || !data.email) {
-         return ContentService
-           .createTextOutput(JSON.stringify({
-             success: false,
-             message: 'Champs obligatoires manquants'
-           }))
-           .setMimeType(ContentService.MimeType.JSON);
-       }
-
-       sheet.appendRow([
-         new Date(),
-         data.nom || '',
-         data.prenom || '',
-         data.statut || '',
-         data.barreau || '',
-         data.email || '',
-         data.participation_campagne || '',
-         data.soutien_candidat || '',
-         data.souhaite_partager_theme || '',
-         data.message || '',
-         data.source || '',
-         data.timestamp_client || ''
-       ]);
-
-       return ContentService
-         .createTextOutput(JSON.stringify({
-           success: true,
-           message: 'Reponse enregistree'
-         }))
-         .setMimeType(ContentService.MimeType.JSON);
-
-     } catch (error) {
-       return ContentService
-         .createTextOutput(JSON.stringify({
-           success: false,
-           message: String(error)
-         }))
-         .setMimeType(ContentService.MimeType.JSON);
-     }
-   }
-
-
-   3. DEPLOIEMENT :
-   ─────────────────
-   - Deployer en tant qu'application Web
-   - Executer en tant que : Moi
-   - Acces : Tout le monde
-   - Copier l'URL et la coller dans APPS_SCRIPT_URL (ligne ~1 du <script>)
-
-══════════════════════════════════════════════════════════════
+   Backend : API sur https://api-batonnat.mybotia.com/api/soutien
+   Base : PostgreSQL mybotia_crm, table soutiens_batonnat
+   Service : systemctl --user status batonnat2028-api.service
 -->
 
 </body>
