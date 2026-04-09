@@ -569,7 +569,7 @@
     </footer>
 
     <script>
-    (function() {
+    (async function() {
         'use strict';
 
         /* ══════ LENIS ══════ */
@@ -580,29 +580,25 @@
             a.addEventListener('click', (e) => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) lenis.scrollTo(t); });
         });
 
-        /* ══════ MOCK DATA ══════ */
-        const mockSoutiens = [
-            { prenom: "Sophie", nom_initial: "M.", statut: "Associée", barreau: "Barreau de Paris", specialite: "Droit des affaires", message: "Clarisse incarne le renouveau dont notre Barreau a besoin. Son écoute et sa détermination sont exactement ce qu'il nous faut.", created_at: "2026-03-25T14:30:00" },
-            { prenom: "Philippe", nom_initial: "D.", statut: "Associé", barreau: "Barreau de Paris", specialite: "Droit pénal", message: "Enfin une candidate qui comprend les enjeux du numérique pour nos cabinets. Mon soutien est total.", created_at: "2026-03-25T10:15:00" },
-            { prenom: "Amélie", nom_initial: "R.", statut: "Collaboratrice", barreau: "Barreau de Paris", specialite: "Droit social", message: "En tant que jeune avocate, je me sens enfin représentée. Clarisse porte notre voix avec force et authenticité.", created_at: "2026-03-24T18:45:00" },
-            { prenom: "Marc", nom_initial: "L.", statut: "Individuel", barreau: "Barreau de Paris", specialite: "Droit immobilier", message: null, created_at: "2026-03-24T09:20:00" },
-            { prenom: "Isabelle", nom_initial: "C.", statut: "Associée", barreau: "Barreau de Paris", specialite: "Propriété intellectuelle", message: "La transparence promise par Clarisse est essentielle. Ouvrons les comptes, montrons l'exemple.", created_at: "2026-03-23T16:00:00" },
-            { prenom: "Thomas", nom_initial: "B.", statut: "Collaborateur", barreau: "Barreau de Paris", specialite: "Droit fiscal", message: "Une vision claire, un programme concret. Clarisse a ma confiance.", created_at: "2026-03-23T11:30:00" },
-            { prenom: "Catherine", nom_initial: "V.", statut: "Honoraire", barreau: "Barreau de Paris", specialite: "Droit de la famille", message: "Après 35 ans de barreau, je reconnais en Clarisse les qualités d'un vrai Bâtonnier : l'écoute, le courage, la vision.", created_at: "2026-03-22T14:10:00" },
-            { prenom: "Alexandre", nom_initial: "F.", statut: "Associé", barreau: "Barreau de Paris", specialite: "Contentieux commercial", message: null, created_at: "2026-03-22T09:00:00" },
-            { prenom: "Nathalie", nom_initial: "P.", statut: "Individuelle", barreau: "Barreau de Paris", specialite: "Droit du travail", message: "La solidarité confraternelle ne doit pas être un slogan. Avec Clarisse, ce sera une réalité.", created_at: "2026-03-21T17:30:00" },
-            { prenom: "Julien", nom_initial: "G.", statut: "Élève-avocat", barreau: "Barreau de Paris", specialite: null, message: "Même en tant qu'élève, je sens que cette campagne nous inclut. C'est rare et précieux.", created_at: "2026-03-21T12:00:00" },
-            { prenom: "Hélène", nom_initial: "T.", statut: "Associée", barreau: "Barreau de Paris", specialite: "Droit européen", message: "Le rayonnement international du Barreau de Paris est un enjeu majeur. Clarisse l'a compris.", created_at: "2026-03-20T15:45:00" },
-            { prenom: "François", nom_initial: "A.", statut: "Individuel", barreau: "Barreau de Paris", specialite: "Droit des sociétés", message: null, created_at: "2026-03-20T10:20:00" },
-            { prenom: "Claire", nom_initial: "J.", statut: "Collaboratrice", barreau: "Barreau de Paris", specialite: "Droit bancaire", message: "L'accès au droit pour tous n'est pas un luxe, c'est une nécessité. Merci Clarisse de le rappeler.", created_at: "2026-03-19T16:30:00" },
-            { prenom: "Bernard", nom_initial: "S.", statut: "Honoraire", barreau: "Barreau de Paris", specialite: "Droit public", message: "J'ai connu beaucoup de candidats au Bâtonnat. Clarisse est de ceux qui tiennent leurs promesses.", created_at: "2026-03-19T08:50:00" },
-            { prenom: "Marine", nom_initial: "K.", statut: "Collaboratrice", barreau: "Barreau de Paris", specialite: "Droit de l'environnement", message: null, created_at: "2026-03-18T14:15:00" },
-            { prenom: "Olivier", nom_initial: "N.", statut: "Associé", barreau: "Autre barreau", specialite: "Droit des affaires internationales", message: "Même depuis un autre barreau, l'élan que crée Clarisse est inspirant. Le Barreau de Paris montre la voie.", created_at: "2026-03-18T11:00:00" },
-            { prenom: "Sandrine", nom_initial: "E.", statut: "Individuelle", barreau: "Barreau de Paris", specialite: "Droit de la santé", message: "Moderniser sans perdre nos valeurs. C'est exactement le chemin que propose Clarisse.", created_at: "2026-03-17T09:30:00" },
-            { prenom: "Laurent", nom_initial: "W.", statut: "Associé", barreau: "Barreau de Paris", specialite: "Arbitrage", message: null, created_at: "2026-03-17T15:00:00" }
-        ];
+        /* ══════ API DATA ══════ */
+        const API_BASE = 'https://api-batonnat.mybotia.com';
+        let soutiensList = [];
+        let TOTAL = 0;
 
-        const TOTAL = mockSoutiens.length;
+        async function loadSoutiens() {
+            try {
+                const res = await fetch(API_BASE + '/api/soutiens');
+                const data = await res.json();
+                soutiensList = data.soutiens || [];
+                TOTAL = data.total || soutiensList.length;
+            } catch (err) {
+                console.error('Erreur chargement soutiens:', err);
+                soutiensList = [];
+                TOTAL = 0;
+            }
+        }
+
+        await loadSoutiens();
 
         /* ══════ RENDER ══════ */
         const grid = document.getElementById('soutiensGrid');
@@ -635,7 +631,20 @@
             return html;
         }
 
-        grid.innerHTML = mockSoutiens.map(renderCard).join('');
+        if (soutiensList.length === 0) {
+            const emptyMsg = document.createElement('p');
+            emptyMsg.style.cssText = 'text-align:center;color:var(--text-muted);padding:40px;grid-column:1/-1;';
+            const link = document.createElement('a');
+            link.href = 'run-for-justice.html';
+            link.style.color = 'var(--or)';
+            link.textContent = 'Rejoindre le mouvement';
+            emptyMsg.textContent = 'Soyez le premier a soutenir Clarisse Surin. ';
+            emptyMsg.appendChild(document.createElement('br'));
+            emptyMsg.appendChild(link);
+            grid.appendChild(emptyMsg);
+        } else {
+            grid.innerHTML = soutiensList.map(renderCard).join('');
+        }
 
         /* Animate counter */
         function animCount(el, target, dur = 2500) {
@@ -686,17 +695,17 @@
                 const body = {};
                 new FormData(avisForm).forEach((v, k) => { if (k !== 'rgpd') body[k] = v; });
 
-                /* For now, try API. If not available, simulate success for demo */
-                try {
-                    const res = await fetch('https://api.mybotia.com/api/avis', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(body)
-                    });
-                    if (!res.ok) throw new Error();
-                } catch {
-                    /* API not ready yet — simulate for demo */
-                    await new Promise(r => setTimeout(r, 1200));
+                const res = await fetch(API_BASE + '/api/soutien', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                if (!res.ok) {
+                    const err = await res.json();
+                    if (err.error && err.error.includes('adresse email')) {
+                        alert('Vous avez deja soumis votre soutien avec cette adresse email.');
+                    }
+                    throw new Error(err.error || 'Erreur');
                 }
 
                 avisForm.style.display = 'none';

@@ -167,12 +167,51 @@ docker exec prospection_postgres psql -U prospection -d mybotia_crm \
 
 ---
 
+## Notifications email
+
+Chaque nouveau soutien declenche un email automatique a :
+- `clarisse.surin@cls-avocat.com`
+- `gilleskorzec@gmail.com`
+
+Envoye via **Gmail API REST** (OAuth2, compte coachdigitalparis@gmail.com).
+Les tokens OAuth se rafraichissent automatiquement.
+
+---
+
+## Acces preview (site complet)
+
+- **URL** : `batonnat2028.com/preview.html`
+- **Mot de passe** : `RunForJustice2028`
+- Charge `campagne.html` dans un iframe avec bandeau "Apercu confidentiel"
+- noindex/nofollow, sessionStorage pour la session
+
+---
+
+## DNS (GoDaddy)
+
+- Registrar : GoDaddy (API key en base credentials)
+- `batonnat2028.com` → A record `76.76.21.21` (Vercel)
+- `www.batonnat2028.com` → CNAME `70df41180343af0b.vercel-dns-017.com`
+- `api-batonnat.mybotia.com` → VPS 180.149.198.23 (wildcard Cloudflare)
+
+---
+
+## Groupes WhatsApp lies
+
+- **"Batonnat 2028"** : `120363425376786580@g.us`
+- **"Clarisse surin"** : `120363426451963719@g.us`
+
+---
+
 ## TODO / Prochaines etapes
 
-- [ ] Connecter `soutiens.html` a l'API reelle (remplacer les mock data)
-- [ ] Reactiver le site complet (`campagne.html` → `index.html`) quand valide
-- [ ] Export Google Sheets si besoin (via API /api/soutiens ou COPY SQL)
-- [ ] Notifications email lors d'un nouveau soutien (a ajouter dans l'API)
+- [x] ~~Connecter `soutiens.html` a l'API reelle~~ (fait 09/04)
+- [x] ~~Notifications email~~ (fait 09/04, Gmail API)
+- [x] ~~DNS apex batonnat2028.com~~ (fait 09/04, GoDaddy API)
+- [x] ~~Preview protege par mot de passe~~ (fait 09/04)
+- [ ] Reactiver le site complet (`campagne.html` → `index.html`) quand valide par l'equipe
+- [ ] Export Google Sheets si demande (via API /api/soutiens ou COPY SQL)
+- [ ] Ajouter champ photo au formulaire (a confirmer avec l'equipe)
 
 ---
 
@@ -181,5 +220,9 @@ docker exec prospection_postgres psql -U prospection -d mybotia_crm \
 | Date | Action | Par |
 |------|--------|-----|
 | ~mars 2026 | Creation site campagne v1 (navy+or) | Lea/Gilles |
-| 09/04/2026 | Landing page + formulaire Run for Justice + API soutien | Jacques |
+| 09/04/2026 | Landing page + formulaire Run for Justice | Jacques |
+| 09/04/2026 | API soutien (PG + Gmail notifications) | Jacques |
+| 09/04/2026 | soutiens.html branchee sur API live | Jacques |
+| 09/04/2026 | DNS apex batonnat2028.com via GoDaddy API | Jacques |
+| 09/04/2026 | Preview protege par mot de passe | Jacques |
 | 09/04/2026 | Domaine batonnat2028.com connecte a Vercel | Gilles |
