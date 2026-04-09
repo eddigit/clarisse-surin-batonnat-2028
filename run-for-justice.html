@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run for Justice — Clarisse Surin, Bâtonnat 2028</title>
+    <meta name="description" content="Rejoignez le mouvement Run for Justice. Soutenez Clarisse Surin pour le Bâtonnat de Paris 2028.">
+    <meta name="theme-color" content="#2E8B57">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ══════════════════════════════════════════
+           RUN FOR JUSTICE — DESIGN SYSTEM
+           Institutional green + warm red
+           ══════════════════════════════════════════ */
+        :root {
+            --bg: #F7F7F5;
+            --card: #F0F0EF;
+            --text-main: #2E3134;
+            --text-secondary: #7A7A78;
+            --border: #D9DCD8;
+            --accent: #2E8B57;
+            --accent-soft: #CCEAE8;
+            --accent-hover: #267349;
+            --red: #C1483F;
+            --red-soft: #F4D2CB;
+            --white: #FFFFFF;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
+            --shadow-elevated: 0 4px 16px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+            --transition: 0.2s ease;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 1.5rem 1rem;
+        }
+
+        /* ══════ DEVICE FRAME ══════ */
+        .device-frame {
+            width: 100%;
+            max-width: 440px;
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: var(--shadow-elevated), 0 0 0 1px rgba(0,0,0,0.03);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .device-inner {
+            padding: 2rem 1.5rem 2.5rem;
+        }
+
+        @media (min-width: 520px) {
+            body { padding: 3rem 1rem; }
+            .device-inner { padding: 2.5rem 2rem 3rem; }
+        }
+
+        /* ══════ TOP LABEL ══════ */
+        .top-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .top-label span {
+            color: var(--border);
+            margin: 0 0.4em;
+        }
+
+        /* ══════ TITLE ══════ */
+        .main-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2rem, 6vw, 2.6rem);
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--text-main);
+            margin-bottom: 0.6rem;
+        }
+
+        .main-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .subtitle {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+            margin-bottom: 1.75rem;
+        }
+
+        /* ══════ PROGRESS BAR ══════ */
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-step {
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: var(--border);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            transition: color var(--transition);
+        }
+
+        .progress-step.active {
+            color: var(--accent);
+        }
+
+        .progress-step.done {
+            color: var(--accent);
+            opacity: 0.6;
+        }
+
+        .progress-track {
+            height: 3px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* ══════ SECTIONS ══════ */
+        .form-section {
+            margin-bottom: 1.75rem;
+        }
+
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.85rem;
+        }
+
+        /* ══════ INPUT FIELDS ══════ */
+        .field-group {
+            margin-bottom: 1rem;
+        }
+
+        .field-label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 0.35rem;
+        }
+
+        .field-label .required {
+            color: var(--red);
+            margin-left: 0.15em;
+        }
+
+        .field-input {
+            width: 100%;
+            padding: 0.7rem 0.85rem;
+            font-family: inherit;
+            font-size: 0.88rem;
+            color: var(--text-main);
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            outline: none;
+            transition: border-color var(--transition), box-shadow var(--transition);
+        }
+
+        .field-input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .field-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        .field-input.error {
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px var(--red-soft);
+        }
+
+        .field-error {
+            font-size: 0.72rem;
+            color: var(--red);
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .field-error.visible {
+            display: block;
+        }
+
+        .field-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        /* ══════ SEGMENTED CONTROL (Profession) ══════ */
+        .segmented-control {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .seg-option {
+            position: relative;
+        }
+
+        .seg-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .seg-option label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 0.4rem;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            text-align: center;
+            transition: all var(--transition);
+            user-select: none;
+        }
+
+        .seg-option label:hover {
+            border-color: var(--accent);
+            color: var(--text-main);
+        }
+
+        .seg-option input:checked + label {
+            background: var(--accent-soft);
+            border-color: var(--accent);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .seg-option input:focus-visible + label {
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        .segmented-error {
+            font-size: 0.72rem;
+            color: var(--red);
+            margin-top: 0.35rem;
+            display: none;
+        }
+
+        .segmented-error.visible {
+            display: block;
+        }
+
+        /* ══════ ENGAGEMENT CARDS ══════ */
+        .engagement-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .engagement-card {
+            position: relative;
+        }
+
+        .engagement-card input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .engagement-card label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.85rem 1rem;
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all var(--transition);
+            user-select: none;
+        }
+
+        .engagement-card label:hover {
+            border-color: var(--accent);
+        }
+
+        .engagement-card input:checked + label {
+            background: var(--accent-soft);
+            border-color: var(--accent);
+        }
+
+        .engagement-card input:focus-visible + label {
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        .card-check {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+        }
+
+        .engagement-card input:checked + label .card-check {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .card-check svg {
+            width: 12px;
+            height: 12px;
+            opacity: 0;
+            transform: scale(0.6);
+            transition: all var(--transition);
+        }
+
+        .engagement-card input:checked + label .card-check svg {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .card-text {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .card-text .card-emoji {
+            margin-right: 0.3em;
+        }
+
+        .card-soutien .card-text {
+            color: var(--red);
+        }
+
+        .engagement-card.card-soutien input:checked + label {
+            background: var(--red-soft);
+            border-color: var(--red);
+        }
+
+        .engagement-card.card-soutien input:checked + label .card-check {
+            background: var(--red);
+            border-color: var(--red);
+        }
+
+        .multi-hint {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: 0.25rem;
+        }
+
+        /* ══════ TEXTAREA ══════ */
+        .textarea-reveal {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .textarea-reveal.open {
+            max-height: 200px;
+            opacity: 1;
+            margin-top: 0.75rem;
+        }
+
+        .field-textarea {
+            width: 100%;
+            padding: 0.7rem 0.85rem;
+            font-family: inherit;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            outline: none;
+            resize: vertical;
+            min-height: 80px;
+            transition: border-color var(--transition), box-shadow var(--transition);
+        }
+
+        .field-textarea::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .field-textarea:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        /* ══════ SUBMIT BUTTON ══════ */
+        .submit-btn {
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            font-family: inherit;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--white);
+            background: var(--accent);
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: background var(--transition), transform 0.1s ease, box-shadow var(--transition);
+            margin-top: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: var(--accent-hover);
+            box-shadow: 0 2px 8px rgba(46, 139, 87, 0.25);
+        }
+
+        .submit-btn:active:not(:disabled) {
+            transform: scale(0.985);
+        }
+
+        .submit-btn:focus-visible {
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .submit-btn .btn-text {
+            transition: opacity 0.2s ease;
+        }
+
+        .submit-btn.loading .btn-text {
+            opacity: 0;
+        }
+
+        .submit-btn .btn-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .submit-btn.loading .btn-spinner {
+            opacity: 1;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2.5px solid rgba(255,255,255,0.3);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ══════ CONFIRMATION SCREEN ══════ */
+        .confirmation-screen {
+            display: none;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .confirmation-screen.visible {
+            display: block;
+            animation: fadeInUp 0.5s var(--transition);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .confirm-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--accent-soft);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+        }
+
+        .confirm-icon svg {
+            width: 28px;
+            height: 28px;
+            color: var(--accent);
+        }
+
+        .confirm-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .confirm-text {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .confirm-back {
+            display: inline-block;
+            margin-top: 1.5rem;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+        }
+
+        .confirm-back:hover {
+            text-decoration: underline;
+        }
+
+        /* ══════ ERROR BANNER ══════ */
+        .error-banner {
+            display: none;
+            padding: 0.75rem 1rem;
+            background: var(--red-soft);
+            border: 1.5px solid var(--red);
+            border-radius: var(--radius-sm);
+            font-size: 0.82rem;
+            color: var(--red);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .error-banner.visible {
+            display: block;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        /* ══════ FOOTER ══════ */
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .form-footer p {
+            font-size: 0.68rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ══════ REDUCED MOTION ══════ */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+            .progress-fill {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="device-frame">
+    <div class="device-inner">
+
+        <!-- TOP LABEL -->
+        <div class="top-label">
+            Newsletter <span>|</span> Engagement participatif
+        </div>
+
+        <!-- TITLE -->
+        <h1 class="main-title">Run for <em>Justice</em></h1>
+        <p class="subtitle">
+            Partagez vos informations, soutenez la campagne de Clarisse Surin
+            pour le Bâtonnat 2028 et proposez les thèmes qui vous tiennent à coeur.
+        </p>
+
+        <!-- PROGRESS -->
+        <div class="progress-container">
+            <div class="progress-steps">
+                <span class="progress-step active" data-step="1">Identite</span>
+                <span class="progress-step" data-step="2">Profession</span>
+                <span class="progress-step" data-step="3">Contact</span>
+                <span class="progress-step" data-step="4">Engagement</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- FORM -->
+        <form id="campaign-form" novalidate>
+            <input type="hidden" name="source" value="newsletter">
+            <input type="hidden" name="timestamp_client" id="timestampClient">
+
+            <!-- ERROR BANNER -->
+            <div class="error-banner" id="errorBanner">
+                Une erreur est survenue. Veuillez reessayer.
+            </div>
+
+            <!-- SECTION: IDENTITE -->
+            <div class="form-section" data-section="1">
+                <div class="section-label">Votre identite</div>
+                <div class="field-row">
+                    <div class="field-group">
+                        <label class="field-label" for="nom">Nom <span class="required">*</span></label>
+                        <input type="text" class="field-input" id="nom" name="nom" autocomplete="family-name" required>
+                        <div class="field-error" id="nomError">Ce champ est requis</div>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label" for="prenom">Prenom <span class="required">*</span></label>
+                        <input type="text" class="field-input" id="prenom" name="prenom" autocomplete="given-name" required>
+                        <div class="field-error" id="prenomError">Ce champ est requis</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: PROFESSION -->
+            <div class="form-section" data-section="2">
+                <div class="section-label">Profession</div>
+                <div class="segmented-control" role="radiogroup" aria-label="Statut professionnel">
+                    <div class="seg-option">
+                        <input type="radio" name="statut" id="statut-avocat" value="avocat" required>
+                        <label for="statut-avocat">Avocat&middot;e</label>
+                    </div>
+                    <div class="seg-option">
+                        <input type="radio" name="statut" id="statut-non-avocat" value="non_avocat">
+                        <label for="statut-non-avocat">Non-avocat&middot;e</label>
+                    </div>
+                    <div class="seg-option">
+                        <input type="radio" name="statut" id="statut-autre" value="autre">
+                        <label for="statut-autre">Autre</label>
+                    </div>
+                </div>
+                <div class="segmented-error" id="statutError">Veuillez selectionner votre statut</div>
+
+                <div class="field-group" style="margin-top: 1rem;">
+                    <label class="field-label" for="barreau">Barreau <span class="required">*</span></label>
+                    <input type="text" class="field-input" id="barreau" name="barreau" placeholder="Ex : Paris, Lyon, Marseille..." required>
+                    <div class="field-error" id="barreauError">Ce champ est requis</div>
+                </div>
+            </div>
+
+            <!-- SECTION: CONTACT -->
+            <div class="form-section" data-section="3">
+                <div class="section-label">Contact</div>
+                <div class="field-group">
+                    <label class="field-label" for="email">Adresse e-mail <span class="required">*</span></label>
+                    <input type="email" class="field-input" id="email" name="email" autocomplete="email" placeholder="prenom.nom@barreau.fr" required>
+                    <div class="field-error" id="emailError">Veuillez saisir une adresse e-mail valide</div>
+                </div>
+            </div>
+
+            <!-- SECTION: ENGAGEMENT -->
+            <div class="form-section" data-section="4">
+                <div class="section-label">Votre engagement</div>
+
+                <div class="engagement-cards">
+                    <div class="engagement-card">
+                        <input type="checkbox" id="participation" name="participation_campagne" value="oui">
+                        <label for="participation">
+                            <div class="card-check">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="2 6 5 9 10 3"/>
+                                </svg>
+                            </div>
+                            <span class="card-text">Je veux participer a la campagne</span>
+                        </label>
+                    </div>
+
+                    <div class="engagement-card card-soutien">
+                        <input type="checkbox" id="soutien" name="soutien_candidat" value="oui">
+                        <label for="soutien">
+                            <div class="card-check">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="2 6 5 9 10 3"/>
+                                </svg>
+                            </div>
+                            <span class="card-text">Je soutiens Clarisse SURIN</span>
+                        </label>
+                    </div>
+
+                    <div class="engagement-card">
+                        <input type="checkbox" id="theme" name="souhaite_partager_theme" value="oui">
+                        <label for="theme">
+                            <div class="card-check">
+                                <svg viewBox="0 0 12 12" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="2 6 5 9 10 3"/>
+                                </svg>
+                            </div>
+                            <span class="card-text">Quel theme souhaiteriez-vous voir aborde ?</span>
+                        </label>
+                    </div>
+                </div>
+
+                <p class="multi-hint">Vous pouvez selectionner plusieurs options simultanement.</p>
+
+                <!-- TEXTAREA (revealed when theme is checked) -->
+                <div class="textarea-reveal" id="themeReveal">
+                    <div class="field-group">
+                        <textarea class="field-textarea" id="message" name="message" placeholder="Acces au droit, egalite dans la profession..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUBMIT -->
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <span class="btn-text">Envoyer ma reponse</span>
+                <span class="btn-spinner"><div class="spinner"></div></span>
+            </button>
+        </form>
+
+        <!-- CONFIRMATION SCREEN -->
+        <div class="confirmation-screen" id="confirmScreen">
+            <div class="confirm-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="4 12 9 17 20 6"/>
+                </svg>
+            </div>
+            <h2 class="confirm-title">Merci pour votre engagement</h2>
+            <p class="confirm-text">
+                Votre reponse a bien ete enregistree. L'equipe de campagne de Clarisse Surin
+                vous recontactera prochainement.
+            </p>
+            <button class="confirm-back" id="confirmBack">Soumettre une autre reponse</button>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="form-footer" id="formFooter">
+            <p>Campagne Clarisse Surin &mdash; Batonnat de Paris 2028<br>
+            Vos donnees sont traitees conformement au RGPD.</p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    /* ══════════════════════════════════════════
+       RUN FOR JUSTICE — FORM LOGIC
+       ══════════════════════════════════════════ */
+
+    // ── Google Apps Script endpoint ──
+    const APPS_SCRIPT_URL = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL_HERE";
+
+    // ── DOM refs ──
+    const form = document.getElementById('campaign-form');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorBanner = document.getElementById('errorBanner');
+    const confirmScreen = document.getElementById('confirmScreen');
+    const confirmBack = document.getElementById('confirmBack');
+    const progressFill = document.getElementById('progressFill');
+    const progressSteps = document.querySelectorAll('.progress-step');
+    const themeCheckbox = document.getElementById('theme');
+    const themeReveal = document.getElementById('themeReveal');
+    const timestampField = document.getElementById('timestampClient');
+
+    // ── Theme textarea reveal ──
+    themeCheckbox.addEventListener('change', function() {
+        themeReveal.classList.toggle('open', this.checked);
+        if (!this.checked) {
+            document.getElementById('message').value = '';
+        }
+    });
+
+    // ── Progress tracking ──
+    const fields = {
+        1: ['nom', 'prenom'],
+        2: ['statut', 'barreau'],
+        3: ['email'],
+        4: []
+    };
+
+    function updateProgress() {
+        let completed = 0;
+        let total = 4;
+
+        // Section 1: identity
+        const nom = document.getElementById('nom').value.trim();
+        const prenom = document.getElementById('prenom').value.trim();
+        if (nom && prenom) completed++;
+
+        // Section 2: profession
+        const statut = document.querySelector('input[name="statut"]:checked');
+        const barreau = document.getElementById('barreau').value.trim();
+        if (statut && barreau) completed++;
+
+        // Section 3: contact
+        const email = document.getElementById('email').value.trim();
+        if (email && isValidEmail(email)) completed++;
+
+        // Section 4: engagement (any checkbox)
+        const anyEngagement = document.querySelector('.engagement-card input:checked');
+        if (anyEngagement) completed++;
+
+        const pct = (completed / total) * 100;
+        progressFill.style.width = pct + '%';
+
+        progressSteps.forEach(step => {
+            const stepNum = parseInt(step.dataset.step);
+            step.classList.remove('active', 'done');
+            if (stepNum <= completed) {
+                step.classList.add('done');
+            }
+            if (stepNum === completed + 1) {
+                step.classList.add('active');
+            }
+        });
+    }
+
+    // Listen for changes
+    form.addEventListener('input', updateProgress);
+    form.addEventListener('change', updateProgress);
+
+    // ── Validation ──
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function validateForm() {
+        let valid = true;
+
+        // Nom
+        const nom = document.getElementById('nom');
+        const nomErr = document.getElementById('nomError');
+        if (!nom.value.trim()) {
+            nom.classList.add('error');
+            nomErr.classList.add('visible');
+            valid = false;
+        } else {
+            nom.classList.remove('error');
+            nomErr.classList.remove('visible');
+        }
+
+        // Prenom
+        const prenom = document.getElementById('prenom');
+        const prenomErr = document.getElementById('prenomError');
+        if (!prenom.value.trim()) {
+            prenom.classList.add('error');
+            prenomErr.classList.add('visible');
+            valid = false;
+        } else {
+            prenom.classList.remove('error');
+            prenomErr.classList.remove('visible');
+        }
+
+        // Statut
+        const statut = document.querySelector('input[name="statut"]:checked');
+        const statutErr = document.getElementById('statutError');
+        if (!statut) {
+            statutErr.classList.add('visible');
+            valid = false;
+        } else {
+            statutErr.classList.remove('visible');
+        }
+
+        // Barreau
+        const barreau = document.getElementById('barreau');
+        const barreauErr = document.getElementById('barreauError');
+        if (!barreau.value.trim()) {
+            barreau.classList.add('error');
+            barreauErr.classList.add('visible');
+            valid = false;
+        } else {
+            barreau.classList.remove('error');
+            barreauErr.classList.remove('visible');
+        }
+
+        // Email
+        const email = document.getElementById('email');
+        const emailErr = document.getElementById('emailError');
+        if (!email.value.trim() || !isValidEmail(email.value.trim())) {
+            email.classList.add('error');
+            emailErr.classList.add('visible');
+            valid = false;
+        } else {
+            email.classList.remove('error');
+            emailErr.classList.remove('visible');
+        }
+
+        return valid;
+    }
+
+    // Clear error on input
+    form.querySelectorAll('.field-input').forEach(input => {
+        input.addEventListener('input', function() {
+            this.classList.remove('error');
+            const errEl = this.parentElement.querySelector('.field-error');
+            if (errEl) errEl.classList.remove('visible');
+        });
+    });
+
+    form.querySelectorAll('input[name="statut"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            document.getElementById('statutError').classList.remove('visible');
+        });
+    });
+
+    // ── Submit ──
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        errorBanner.classList.remove('visible');
+
+        if (!validateForm()) {
+            // Scroll to first error
+            const firstErr = form.querySelector('.error, .segmented-error.visible');
+            if (firstErr) {
+                firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+        }
+
+        // Set timestamp
+        timestampField.value = new Date().toISOString();
+
+        // Set empty strings for unchecked checkboxes
+        const participationCb = document.getElementById('participation');
+        const soutienCb = document.getElementById('soutien');
+        const themeCb = document.getElementById('theme');
+
+        // Loading state
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+
+        try {
+            const formData = new FormData(form);
+
+            // Ensure unchecked values are empty strings
+            if (!participationCb.checked) formData.set('participation_campagne', '');
+            if (!soutienCb.checked) formData.set('soutien_candidat', '');
+            if (!themeCb.checked) formData.set('souhaite_partager_theme', '');
+
+            let success = false;
+
+            if (APPS_SCRIPT_URL.includes('PASTE_YOUR')) {
+                // Demo mode: simulate success
+                await new Promise(resolve => setTimeout(resolve, 1200));
+                success = true;
+            } else {
+                // Real submission to Google Apps Script
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                // Apps Script may return text or JSON
+                const contentType = response.headers.get('content-type') || '';
+                if (contentType.includes('application/json')) {
+                    const data = await response.json();
+                    success = data.success === true;
+                    if (!success) throw new Error(data.message || 'Erreur serveur');
+                } else {
+                    const text = await response.text();
+                    // Accept any 2xx or truthy text response
+                    success = response.ok || text.toLowerCase().includes('success');
+                }
+            }
+
+            if (success) {
+                showConfirmation();
+            }
+
+        } catch (err) {
+            console.error('Submit error:', err);
+            errorBanner.textContent = 'Une erreur est survenue. Veuillez reessayer.';
+            errorBanner.classList.add('visible');
+        } finally {
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+        }
+    });
+
+    function showConfirmation() {
+        form.style.display = 'none';
+        document.querySelector('.progress-container').style.display = 'none';
+        confirmScreen.classList.add('visible');
+    }
+
+    confirmBack.addEventListener('click', function() {
+        form.reset();
+        themeReveal.classList.remove('open');
+        form.style.display = '';
+        document.querySelector('.progress-container').style.display = '';
+        confirmScreen.classList.remove('visible');
+        errorBanner.classList.remove('visible');
+        progressFill.style.width = '0%';
+        progressSteps.forEach((step, i) => {
+            step.classList.remove('active', 'done');
+            if (i === 0) step.classList.add('active');
+        });
+    });
+
+    // ── Init ──
+    updateProgress();
+</script>
+
+<!--
+══════════════════════════════════════════════════════════════
+   GOOGLE SHEETS INTEGRATION — GUIDE DEPLOIEMENT
+══════════════════════════════════════════════════════════════
+
+   1. EN-TETES LIGNE 1 DE LA FEUILLE "Reponses" :
+   ─────────────────────────────────────────────────
+   date_reception | nom | prenom | statut | barreau | email | participation_campagne | soutien_candidat | souhaite_partager_theme | message | source | timestamp_client
+
+
+   2. APPS SCRIPT — doPost(e) :
+   ─────────────────────────────
+   Coller dans Extensions > Apps Script du Google Sheet :
+
+   function doPost(e) {
+     try {
+       const SHEET_NAME = 'Reponses';
+       const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+       const data = e.parameter || {};
+
+       if (!sheet) {
+         throw new Error('Feuille "Reponses" introuvable');
+       }
+
+       if (!data.nom || !data.prenom || !data.email) {
+         return ContentService
+           .createTextOutput(JSON.stringify({
+             success: false,
+             message: 'Champs obligatoires manquants'
+           }))
+           .setMimeType(ContentService.MimeType.JSON);
+       }
+
+       sheet.appendRow([
+         new Date(),
+         data.nom || '',
+         data.prenom || '',
+         data.statut || '',
+         data.barreau || '',
+         data.email || '',
+         data.participation_campagne || '',
+         data.soutien_candidat || '',
+         data.souhaite_partager_theme || '',
+         data.message || '',
+         data.source || '',
+         data.timestamp_client || ''
+       ]);
+
+       return ContentService
+         .createTextOutput(JSON.stringify({
+           success: true,
+           message: 'Reponse enregistree'
+         }))
+         .setMimeType(ContentService.MimeType.JSON);
+
+     } catch (error) {
+       return ContentService
+         .createTextOutput(JSON.stringify({
+           success: false,
+           message: String(error)
+         }))
+         .setMimeType(ContentService.MimeType.JSON);
+     }
+   }
+
+
+   3. DEPLOIEMENT :
+   ─────────────────
+   - Deployer en tant qu'application Web
+   - Executer en tant que : Moi
+   - Acces : Tout le monde
+   - Copier l'URL et la coller dans APPS_SCRIPT_URL (ligne ~1 du <script>)
+
+══════════════════════════════════════════════════════════════
+-->
+
+</body>
+</html>
