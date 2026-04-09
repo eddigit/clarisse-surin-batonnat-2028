@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS soutiens_batonnat (
     soutien_candidat VARCHAR(5) DEFAULT '',
     souhaite_partager_theme VARCHAR(5) DEFAULT '',
     source VARCHAR(50) DEFAULT 'website',
+    photo_url VARCHAR(255) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT NOW()
 );
 

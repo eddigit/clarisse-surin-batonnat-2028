@@ -451,6 +451,75 @@
             box-shadow: 0 0 0 3px var(--accent-soft);
         }
 
+        /* ══════ PHOTO UPLOAD ══════ */
+        .photo-upload {
+            margin-top: 1rem;
+        }
+        .photo-drop {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1.2rem;
+            background: var(--card);
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: border-color var(--transition), background var(--transition);
+            text-align: center;
+        }
+        .photo-drop:hover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+        .photo-drop svg {
+            width: 28px; height: 28px;
+            color: var(--text-secondary);
+        }
+        .photo-drop-text {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+        .photo-drop input[type="file"] {
+            display: none;
+        }
+        .photo-preview {
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem;
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            margin-top: 0.5rem;
+        }
+        .photo-preview.show {
+            display: flex;
+        }
+        .photo-preview img {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .photo-preview-name {
+            flex: 1;
+            font-size: 0.78rem;
+            color: var(--text-main);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .photo-preview-remove {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
         /* ══════ SUBMIT BUTTON ══════ */
         .submit-btn {
             width: 100%;
@@ -731,6 +800,25 @@
                 </div>
             </div>
 
+            <!-- SECTION: PHOTO (optional) -->
+            <div class="form-section" data-section="photo">
+                <div class="section-label">Votre photo <span style="font-weight:400;color:var(--text-secondary);font-size:0.75rem;">(facultatif)</span></div>
+                <div class="photo-upload">
+                    <label class="photo-drop" id="photoDrop">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                        </svg>
+                        <span class="photo-drop-text">Appuyez pour ajouter une photo</span>
+                        <input type="file" id="photoInput" accept="image/*" capture="user">
+                    </label>
+                    <div class="photo-preview" id="photoPreview">
+                        <img id="photoThumb" src="" alt="Apercu">
+                        <span class="photo-preview-name" id="photoName"></span>
+                        <button type="button" class="photo-preview-remove" id="photoRemove" aria-label="Supprimer">&times;</button>
+                    </div>
+                </div>
+            </div>
+
             <!-- SECTION: ENGAGEMENT -->
             <div class="form-section" data-section="4">
                 <div class="section-label">Votre engagement</div>
@@ -833,6 +921,51 @@
     const themeCheckbox = document.getElementById('theme');
     const themeReveal = document.getElementById('themeReveal');
     const timestampField = document.getElementById('timestampClient');
+
+    // ── Photo upload (optional, resize to 300px max) ──
+    const photoInput = document.getElementById('photoInput');
+    const photoDrop = document.getElementById('photoDrop');
+    const photoPreview = document.getElementById('photoPreview');
+    const photoThumb = document.getElementById('photoThumb');
+    const photoName = document.getElementById('photoName');
+    const photoRemove = document.getElementById('photoRemove');
+    let photoBase64 = null;
+
+    photoInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const MAX = 300;
+                let w = img.width, h = img.height;
+                if (w > MAX || h > MAX) {
+                    if (w > h) { h = Math.round(h * MAX / w); w = MAX; }
+                    else { w = Math.round(w * MAX / h); h = MAX; }
+                }
+                const canvas = document.createElement('canvas');
+                canvas.width = w; canvas.height = h;
+                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                photoBase64 = canvas.toDataURL('image/jpeg', 0.85);
+                photoThumb.src = photoBase64;
+                photoName.textContent = file.name;
+                photoDrop.style.display = 'none';
+                photoPreview.classList.add('show');
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+
+    photoRemove.addEventListener('click', function() {
+        photoBase64 = null;
+        photoInput.value = '';
+        photoThumb.src = '';
+        photoDrop.style.display = '';
+        photoPreview.classList.remove('show');
+    });
 
     // ── Theme textarea reveal ──
     themeCheckbox.addEventListener('change', function() {
@@ -1012,7 +1145,8 @@
                 participation_campagne: participationCb.checked ? 'oui' : '',
                 soutien_candidat: soutienCb.checked ? 'oui' : '',
                 souhaite_partager_theme: themeCb.checked ? 'oui' : '',
-                source: 'run-for-justice'
+                source: 'run-for-justice',
+                photo: photoBase64 || null
             };
 
             const response = await fetch(API_URL, {
@@ -1052,6 +1186,10 @@
 
     confirmBack.addEventListener('click', function() {
         form.reset();
+        photoBase64 = null;
+        photoThumb.src = '';
+        photoDrop.style.display = '';
+        photoPreview.classList.remove('show');
         themeReveal.classList.remove('open');
         form.style.display = '';
         document.querySelector('.progress-container').style.display = '';

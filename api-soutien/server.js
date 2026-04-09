@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const PORT = 3004;
@@ -100,8 +102,19 @@ app.use(cors({
     ],
     methods: ['GET', 'POST']
 }));
-app.use(express.json());
+
+// CORS for uploaded photos
+app.use('/uploads', (req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+});
+app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
+
+// Serve uploaded photos
+const UPLOADS_DIR = path.join(__dirname, 'uploads');
+if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR);
+app.use('/uploads', express.static(UPLOADS_DIR));
 
 // POST /api/soutien — nouveau soutien
 app.post('/api/soutien', async (req, res) => {
@@ -110,25 +123,39 @@ app.post('/api/soutien', async (req, res) => {
             prenom, nom, email, telephone, barreau, statut,
             specialite, message,
             participation_campagne, soutien_candidat, souhaite_partager_theme,
-            source
+            source, photo
         } = req.body;
 
         if (!prenom || !nom || !email) {
             return res.status(400).json({ error: 'Prenom, nom et email requis' });
         }
 
+        // Save photo to disk if provided
+        let photoUrl = null;
+        if (photo && photo.startsWith('data:image/')) {
+            const matches = photo.match(/^data:image\/(jpeg|png|webp);base64,(.+)$/);
+            if (matches) {
+                const ext = matches[1] === 'jpeg' ? 'jpg' : matches[1];
+                const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+                const filepath = path.join(UPLOADS_DIR, filename);
+                fs.writeFileSync(filepath, Buffer.from(matches[2], 'base64'));
+                photoUrl = `/uploads/${filename}`;
+            }
+        }
+
         const result = await pool.query(
             `INSERT INTO soutiens_batonnat
              (prenom, nom, email, telephone, barreau, statut, specialite, message,
-              participation_campagne, soutien_candidat, souhaite_partager_theme, source)
-             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+              participation_campagne, soutien_candidat, souhaite_partager_theme, source, photo_url)
+             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)
              RETURNING id`,
             [
                 prenom, nom, email,
                 telephone || null, barreau || null, statut || null,
                 specialite || null, message || null,
                 participation_campagne || '', soutien_candidat || '',
-                souhaite_partager_theme || '', source || 'website'
+                souhaite_partager_theme || '', source || 'website',
+                photoUrl
             ]
         );
 
@@ -185,7 +212,7 @@ app.get('/api/soutiens', async (req, res) => {
         const result = await pool.query(
             `SELECT prenom, SUBSTRING(nom, 1, 1) || '.' as nom_initial,
                     statut, specialite, barreau, message,
-                    participation_campagne, soutien_candidat, created_at
+                    participation_campagne, soutien_candidat, photo_url, created_at
              FROM soutiens_batonnat
              ORDER BY created_at DESC`
         );
