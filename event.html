@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Soutenez Clarisse Surin — Bâtonnat 2028</title>
     <meta name="robots" content="noindex, nofollow">
-    <meta name="theme-color" content="#0f1a2e">
+    <meta name="theme-color" content="#2B2F33">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -18,13 +18,15 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --navy: #0f1a2e;
-            --navy-mid: #162240;
-            --or: #c8a04a;
-            --or-clair: #dbb95e;
-            --or-pale: rgba(200, 160, 74, 0.12);
-            --text-bright: #f0ebe2;
-            --text-muted: #8a8278;
+            --dark: #2B2F33;
+            --bg: #B7C5C0;
+            --accent: #8FA8A0;
+            --accent-hover: #7A958D;
+            --accent-pale: rgba(143, 168, 160, 0.15);
+            --card-bg: #F5F3EF;
+            --text-main: #2B2F33;
+            --text-muted: #74716D;
+            --border: #C3C6C8;
         }
 
         html, body {
@@ -34,8 +36,8 @@
 
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--navy);
-            color: var(--text-bright);
+            background: var(--bg);
+            color: var(--text-main);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -54,7 +56,7 @@
             position: fixed;
             width: 500px; height: 500px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(200,160,74,0.06) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(143,168,160,0.12) 0%, transparent 70%);
             top: -100px; left: 50%;
             transform: translateX(-50%);
             pointer-events: none;
@@ -84,8 +86,8 @@
             width: 130px; height: 130px;
             border-radius: 50%;
             overflow: hidden;
-            border: 3px solid var(--or);
-            box-shadow: 0 0 40px rgba(200,160,74,0.15);
+            border: 3px solid var(--accent);
+            box-shadow: 0 0 40px rgba(143,168,160,0.2);
             margin-bottom: 24px;
         }
         .photo img {
@@ -99,7 +101,7 @@
             font-size: 32px;
             font-weight: 700;
             letter-spacing: 0.02em;
-            color: var(--text-bright);
+            color: var(--text-main);
             margin-bottom: 6px;
         }
 
@@ -108,7 +110,7 @@
             font-weight: 300;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            color: var(--or);
+            color: var(--text-muted);
             margin-bottom: 32px;
         }
 
@@ -133,14 +135,18 @@
             margin-bottom: 28px;
         }
 
+        .install-text small {
+            color: var(--border);
+        }
+
         /* CTA */
         .cta {
             display: inline-flex;
             align-items: center;
             gap: 10px;
             padding: 16px 40px;
-            background: linear-gradient(135deg, var(--or), var(--or-clair));
-            color: var(--navy);
+            background: var(--accent);
+            color: #FFFFFF;
             font-family: 'Inter', sans-serif;
             font-size: 15px;
             font-weight: 600;
@@ -150,7 +156,7 @@
             border-radius: 50px;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(200,160,74,0.3);
+            box-shadow: 0 4px 20px rgba(143,168,160,0.3);
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .cta:active {
@@ -164,8 +170,8 @@
         .install-banner {
             position: fixed;
             bottom: 0; left: 0; right: 0;
-            background: var(--navy-mid);
-            border-top: 1px solid rgba(200,160,74,0.15);
+            background: var(--dark);
+            border-top: 1px solid var(--border);
             padding: 14px 20px;
             display: none;
             align-items: center;
@@ -180,7 +186,7 @@
         }
         .install-text {
             font-size: 13px;
-            color: var(--text-bright);
+            color: #FFFFFF;
             line-height: 1.4;
         }
         .install-text small {
@@ -191,8 +197,8 @@
         }
         .install-btn {
             padding: 8px 20px;
-            background: var(--or);
-            color: var(--navy);
+            background: var(--accent);
+            color: #FFFFFF;
             font-family: 'Inter', sans-serif;
             font-size: 12px;
             font-weight: 600;
@@ -339,7 +345,7 @@
 
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, size, size);
-        ctx.fillStyle = '#0f1a2e';
+        ctx.fillStyle = '#2B2F33';
 
         for (var row = 0; row < count; row++) {
             for (var col = 0; col < count; col++) {

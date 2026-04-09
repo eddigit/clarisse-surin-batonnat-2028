@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clarisse Surin — Bâtonnat de Paris 2028</title>
     <meta name="description" content="Clarisse Surin, candidate au Bâtonnat de Paris 2028.">
-    <meta name="theme-color" content="#0f1a2e">
+    <meta name="theme-color" content="#2B2F33">
     <meta property="og:title" content="Clarisse Surin — Bâtonnat de Paris 2028">
     <meta property="og:description" content="Candidate au Bâtonnat de Paris 2028. Rejoignez le mouvement.">
     <meta property="og:image" content="https://res.cloudinary.com/dniurvpzd/image/upload/v1769084034/Clarisse_Surin_image_hero_jm89nm.webp">
@@ -21,13 +21,15 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --navy-deep: #0f1a2e;
-            --navy-mid: #162240;
-            --or: #c8a04a;
-            --or-clair: #dbb95e;
-            --or-pale: rgba(200, 160, 74, 0.10);
-            --text-bright: #f0ebe2;
-            --text-muted: #8a8278;
+            --dark: #2B2F33;
+            --bg: #B7C5C0;
+            --accent: #8FA8A0;
+            --accent-hover: #7A958D;
+            --accent-pale: rgba(143, 168, 160, 0.15);
+            --card-bg: #F5F3EF;
+            --text-main: #2B2F33;
+            --text-muted: #74716D;
+            --border: #C3C6C8;
         }
 
         html, body {
@@ -37,8 +39,8 @@
 
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--navy-deep);
-            color: var(--text-bright);
+            background: var(--bg);
+            color: var(--text-main);
             -webkit-font-smoothing: antialiased;
             display: flex;
             align-items: center;
@@ -56,14 +58,14 @@
             z-index: 1;
         }
 
-        /* Gold line accents */
+        /* Accent line accents */
         .line-top, .line-bottom {
             position: fixed;
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--or), transparent);
-            opacity: 0.25;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            opacity: 0.5;
             z-index: 2;
         }
         .line-top { top: 0; }
@@ -93,10 +95,10 @@
             height: 180px;
             border-radius: 50%;
             overflow: hidden;
-            border: 2px solid var(--or);
+            border: 2px solid var(--accent);
             box-shadow:
-                0 0 0 6px var(--or-pale),
-                0 8px 40px rgba(0,0,0,0.4);
+                0 0 0 6px var(--accent-pale),
+                0 8px 40px rgba(0,0,0,0.12);
             margin-bottom: 2.5rem;
             animation: photoIn 1s ease 0.3s both;
         }
@@ -133,7 +135,7 @@
         .divider {
             width: 48px;
             height: 2px;
-            background: var(--or);
+            background: var(--accent);
             margin: 1.2rem auto;
             animation: textIn 0.8s ease 0.65s both;
         }
@@ -144,7 +146,7 @@
             font-size: clamp(1rem, 2.8vw, 1.3rem);
             font-weight: 400;
             font-style: italic;
-            color: var(--or-clair);
+            color: var(--text-muted);
             letter-spacing: 0.04em;
             animation: textIn 0.8s ease 0.8s both;
         }
@@ -170,8 +172,8 @@
             font-weight: 500;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: var(--navy-deep);
-            background: var(--or);
+            color: #FFFFFF;
+            background: var(--accent);
             border: none;
             border-radius: 4px;
             text-decoration: none;
@@ -180,8 +182,8 @@
         }
 
         .cta-link:hover {
-            background: var(--or-clair);
-            box-shadow: 0 4px 20px rgba(200, 160, 74, 0.25);
+            background: var(--accent-hover);
+            box-shadow: 0 4px 20px rgba(143, 168, 160, 0.3);
             transform: translateY(-1px);
         }
 

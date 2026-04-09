@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apercu — Batonnat 2028</title>
     <meta name="robots" content="noindex, nofollow">
-    <meta name="theme-color" content="#0f1a2e">
+    <meta name="theme-color" content="#2B2F33">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,13 +15,14 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --navy: #0f1a2e;
-            --navy-light: #162240;
-            --or: #c8a04a;
-            --or-clair: #dbb95e;
-            --or-pale: rgba(200, 160, 74, 0.10);
-            --text-bright: #f0ebe2;
-            --text-muted: #8a8278;
+            --dark: #2B2F33;
+            --bg: #B7C5C0;
+            --accent: #8FA8A0;
+            --accent-hover: #7A958D;
+            --card-bg: #F5F3EF;
+            --text-main: #2B2F33;
+            --text-muted: #74716D;
+            --border: #C3C6C8;
             --red: #c1483f;
         }
 
@@ -29,8 +30,8 @@
 
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--navy);
-            color: var(--text-bright);
+            background: var(--bg);
+            color: var(--text-main);
             -webkit-font-smoothing: antialiased;
             display: flex;
             align-items: center;
@@ -89,9 +90,9 @@
             padding: 0.75rem 1rem;
             font-family: inherit;
             font-size: 0.9rem;
-            color: var(--text-bright);
-            background: var(--navy-light);
-            border: 1.5px solid rgba(200, 160, 74, 0.15);
+            color: var(--text-main);
+            background: var(--card-bg);
+            border: 1.5px solid var(--border);
             border-radius: 8px;
             outline: none;
             text-align: center;
@@ -105,7 +106,7 @@
         }
 
         .gate-input:focus {
-            border-color: var(--or);
+            border-color: var(--accent);
         }
 
         .gate-input.error {
@@ -126,8 +127,8 @@
             font-weight: 500;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: var(--navy);
-            background: var(--or);
+            color: #FFFFFF;
+            background: var(--accent);
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -135,7 +136,7 @@
         }
 
         .gate-btn:hover {
-            background: var(--or-clair);
+            background: var(--accent-hover);
         }
 
         .gate-btn:active {
@@ -173,8 +174,8 @@
             left: 0;
             right: 0;
             z-index: 101;
-            background: var(--or);
-            color: var(--navy);
+            background: var(--accent);
+            color: #FFFFFF;
             text-align: center;
             padding: 0.5rem 1rem;
             font-size: 0.75rem;
@@ -188,7 +189,7 @@
         }
 
         .preview-banner a {
-            color: var(--navy);
+            color: #FFFFFF;
             text-decoration: underline;
             cursor: pointer;
         }
@@ -210,10 +211,10 @@
 
     <!-- PASSWORD GATE -->
     <div class="gate" id="gate">
-        <svg class="gate-icon" viewBox="0 0 48 48" fill="none" stroke="#c8a04a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="gate-icon" viewBox="0 0 48 48" fill="none" stroke="#8FA8A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="8" y="22" width="32" height="22" rx="3"/>
             <path d="M14 22V14a10 10 0 0 1 20 0v8"/>
-            <circle cx="24" cy="33" r="3" fill="#c8a04a" stroke="none"/>
+            <circle cx="24" cy="33" r="3" fill="#8FA8A0" stroke="none"/>
             <line x1="24" y1="36" x2="24" y2="39"/>
         </svg>
 

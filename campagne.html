@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clarisse Surin — Bâtonnat 2028 | En Position</title>
     <meta name="description" content="Clarisse Surin, candidate au Bâtonnat de Paris 2028. Rejoignez le mouvement. Prenez position.">
-    <meta name="theme-color" content="#1a2d4a">
+    <meta name="theme-color" content="#2B2F33">
     <meta property="og:title" content="Clarisse Surin — Bâtonnat 2028">
     <meta property="og:description" content="En position. Prête à mener. Rejoignez le mouvement pour le Barreau de Paris.">
     <meta property="og:image" content="https://res.cloudinary.com/dniurvpzd/image/upload/v1769084034/Clarisse_Surin_image_hero_jm89nm.webp">
@@ -21,38 +21,39 @@
            Deep Navy + Gold
            ══════════════════════════════════════════ */
         :root {
-            /* Navy depths — lightened */
-            --navy-1: #1a2d4a;
-            --navy-2: #1e3355;
-            --navy-3: #243d63;
-            --navy-4: #2d4d7a;
-            --navy-5: #3a5e90;
-            --navy-6: #4472a8;
-            --navy-card: #1e3050;
-            --navy-card-hover: #243860;
-            --navy-border: rgba(200, 175, 100, 0.08);
-            --navy-border-hover: rgba(200, 175, 100, 0.18);
+            /* Dark tones */
+            --navy-1: #2B2F33;
+            --navy-2: #353A3E;
+            --navy-3: #3F4448;
+            --navy-4: #4A5054;
+            --navy-5: #5A6064;
+            --navy-6: #6A7074;
+            --navy-card: #F5F3EF;
+            --navy-card-hover: #FFFEFA;
+            --navy-border: rgba(195, 198, 200, 0.4);
+            --navy-border-hover: rgba(143, 168, 160, 0.35);
 
-            /* Gold spectrum */
-            --or: #c8a04a;
-            --or-clair: #dbb95e;
-            --or-pale: #e8cf88;
-            --or-fonce: #8a6e2e;
-            --or-muted: rgba(200, 160, 74, 0.6);
-            --or-glow: rgba(200, 160, 74, 0.12);
+            /* Accent spectrum (green institutional) */
+            --or: #8FA8A0;
+            --or-clair: #A3B8B1;
+            --or-pale: #C5D0CC;
+            --or-fonce: #7A958D;
+            --or-muted: rgba(143, 168, 160, 0.6);
+            --or-glow: rgba(143, 168, 160, 0.12);
 
             /* Cream for contrast sections */
-            --creme: #f4f0e8;
-            --creme-chaud: #f8f4ec;
-            --sable: #e2dcd0;
+            --creme: #F5F3EF;
+            --creme-chaud: #FAF8F4;
+            --sable: #C3C6C8;
 
-            /* Text */
-            --text-bright: #f2ede5;
-            --text-body: #c8c0b0;
-            --text-muted: #7a7268;
-            --text-dim: #4a4440;
-            --text-dark: #1a1815;
-            --text-dark-body: #4a4640;
+            /* Text — light (for dark sections) */
+            --text-bright: #F0EBE4;
+            --text-body: #C0BAB0;
+            --text-muted: #9A9793;
+            --text-dim: #74716D;
+            /* Text — dark (for light sections) */
+            --text-dark: #2B2F33;
+            --text-dark-body: #74716D;
 
             /* Easings */
             --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -82,22 +83,22 @@
 
         html {
             scrollbar-width: thin;
-            scrollbar-color: var(--or-fonce) var(--navy-1);
+            scrollbar-color: var(--or-fonce) #B7C5C0;
             overflow-x: hidden;
         }
         html::-webkit-scrollbar { width: 4px; }
-        html::-webkit-scrollbar-track { background: var(--navy-1); }
+        html::-webkit-scrollbar-track { background: #B7C5C0; }
         html::-webkit-scrollbar-thumb { background: var(--or-fonce); }
 
         body {
             font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--navy-2);
+            background: #B7C5C0;
             color: var(--text-bright);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
         }
 
-        ::selection { background: var(--or); color: var(--navy-1); }
+        ::selection { background: var(--or); color: #FFFFFF; }
         img { display: block; max-width: 100%; }
         a { text-decoration: none; color: inherit; }
         button { font-family: inherit; }
@@ -117,7 +118,7 @@
             mix-blend-mode: difference;
         }
         .cursor-ring.visible { opacity: 1; }
-        .cursor-ring.active { width: 70px; height: 70px; background: rgba(200,160,74,0.04); border-color: var(--or); }
+        .cursor-ring.active { width: 70px; height: 70px; background: rgba(143,168,160,0.04); border-color: var(--or); }
         .cursor-ring.pressed { transform: translate(-50%, -50%) scale(0.85); }
         @media (hover: none), (pointer: coarse) { .cursor-ring { display: none !important; } }
 
@@ -213,7 +214,7 @@
             color: var(--or);
             letter-spacing: 8px;
             text-transform: uppercase;
-            text-shadow: 0 0 40px rgba(200,160,74,0.3);
+            text-shadow: 0 0 40px rgba(143,168,160,0.3);
         }
         .loader-name span {
             display: inline-block;
@@ -245,7 +246,7 @@
             content: ''; position: absolute; left: 0; top: 0;
             height: 100%; width: 0; background: linear-gradient(90deg, var(--or-fonce), var(--or), var(--or-clair));
             animation: loaderFill 2s var(--ease-in-out-quint) forwards 0.3s;
-            box-shadow: 0 0 12px rgba(200,160,74,0.5);
+            box-shadow: 0 0 12px rgba(143,168,160,0.5);
         }
         @keyframes loaderFill { to { width: 100%; } }
         @keyframes fadeIn { to { opacity: 1; } }
@@ -275,7 +276,7 @@
             transition: box-shadow 0.5s var(--ease-out-expo);
         }
         .glow-hover:hover {
-            box-shadow: 0 0 40px rgba(200,160,74,0.08), 0 20px 60px rgba(0,0,0,0.2);
+            box-shadow: 0 0 40px rgba(143,168,160,0.08), 0 20px 60px rgba(0,0,0,0.2);
         }
 
         /* Section divider animation */
@@ -300,7 +301,7 @@
         }
         nav.scrolled {
             padding: 14px 5vw;
-            background: rgba(12, 21, 37, 0.92);
+            background: rgba(43, 47, 51, 0.95);
             backdrop-filter: blur(40px) saturate(1.3);
             -webkit-backdrop-filter: blur(40px) saturate(1.3);
             border-bottom: 1px solid var(--navy-border);
@@ -335,7 +336,7 @@
             color: var(--or) !important;
             transition: all 0.4s var(--ease-out-expo) !important;
         }
-        .nav-cta:hover { background: var(--or) !important; color: var(--navy-1) !important; border-color: var(--or) !important; }
+        .nav-cta:hover { background: var(--or) !important; color: #FFFFFF !important; border-color: var(--or) !important; }
         .nav-cta::after { display: none !important; }
 
         .burger { display: none; width: 28px; height: 18px; position: relative; cursor: pointer; z-index: 1001; }
@@ -384,8 +385,8 @@
         .hero-img-wrap::after {
             content: ''; position: absolute; inset: 0;
             background:
-                linear-gradient(180deg, rgba(8,14,26,0.4) 0%, rgba(8,14,26,0.05) 30%, rgba(8,14,26,0.12) 55%, rgba(12,21,37,0.88) 88%, var(--navy-2) 100%),
-                linear-gradient(90deg, rgba(8,14,26,0.8) 0%, transparent 55%);
+                linear-gradient(180deg, rgba(43,47,51,0.4) 0%, rgba(43,47,51,0.05) 30%, rgba(43,47,51,0.12) 55%, rgba(43,47,51,0.88) 88%, var(--navy-2) 100%),
+                linear-gradient(90deg, rgba(43,47,51,0.8) 0%, transparent 55%);
             z-index: 1;
         }
 
@@ -469,7 +470,7 @@
 
         .btn-primary {
             display: inline-flex; align-items: center; gap: 14px;
-            background: var(--or); color: var(--navy-1);
+            background: var(--or); color: #FFFFFF;
             padding: 18px 42px;
             font-size: var(--fs-xs); font-weight: 700;
             letter-spacing: 3px; text-transform: uppercase;
@@ -485,7 +486,7 @@
             z-index: 1; transition: left 0.7s var(--ease-out-expo);
         }
         .btn-primary:hover::before { left: 150%; }
-        .btn-primary:hover { box-shadow: 0 20px 60px rgba(200,160,74,0.25); transform: translateY(-2px); }
+        .btn-primary:hover { box-shadow: 0 20px 60px rgba(143,168,160,0.25); transform: translateY(-2px); }
         .btn-primary svg { transition: transform 0.4s var(--ease-out-expo); }
         .btn-primary:hover svg { transform: translateX(4px); }
 
@@ -522,7 +523,7 @@
         .scroll-dot { width: 6px; height: 6px; border: 1px solid var(--or); border-radius: 50%; position: relative; }
         .scroll-dot::after {
             content: ''; position: absolute; inset: -4px;
-            border: 1px solid rgba(200,160,74,0.3); border-radius: 50%;
+            border: 1px solid rgba(143,168,160,0.3); border-radius: 50%;
             animation: ping 2s ease infinite;
         }
         @keyframes ping { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.5); opacity: 0; } }
@@ -641,7 +642,7 @@
             transform: translateX(8px) translateY(-2px);
             border-color: var(--navy-border-hover);
             background: var(--navy-card-hover);
-            box-shadow: 10px 10px 40px rgba(0,0,0,0.15), 0 0 30px rgba(200,160,74,0.04);
+            box-shadow: 10px 10px 40px rgba(0,0,0,0.15), 0 0 30px rgba(143,168,160,0.04);
         }
         .v-card .num {
             font-family: 'JetBrains Mono', monospace;
@@ -677,7 +678,7 @@
             transition: transform 0.7s var(--ease-out-expo);
         }
         .p-card:hover::after { transform: scaleX(1); }
-        .p-card:hover { background: var(--navy-4); box-shadow: inset 0 -2px 30px rgba(200,160,74,0.03); }
+        .p-card:hover { background: var(--navy-4); box-shadow: inset 0 -2px 30px rgba(143,168,160,0.03); }
 
         .p-card .tag {
             font-family: 'JetBrains Mono', monospace;
@@ -769,7 +770,7 @@
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             width: 700px; height: 500px;
-            background: radial-gradient(ellipse, rgba(200,160,74,0.06), transparent 65%);
+            background: radial-gradient(ellipse, rgba(143,168,160,0.06), transparent 65%);
             pointer-events: none;
         }
         #citation blockquote {
@@ -887,12 +888,12 @@
             transition: border-color 0.3s, box-shadow 0.3s;
         }
         .fg input:focus, .fg select:focus, .fg textarea:focus {
-            border-color: var(--or); box-shadow: 0 0 0 3px rgba(200,160,74,0.08);
+            border-color: var(--or); box-shadow: 0 0 0 3px rgba(143,168,160,0.08);
         }
         .fg input::placeholder, .fg textarea::placeholder { color: var(--text-dim); font-size: 0.82rem; }
         .fg select {
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23c8a04a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%238FA8A0' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
             background-repeat: no-repeat; background-position: right 14px center;
             cursor: pointer;
         }
@@ -906,7 +907,7 @@
 
         .btn-submit {
             width: 100%; padding: 18px;
-            background: var(--navy-3); color: var(--or);
+            background: var(--or); color: #FFFFFF;
             border: none;
             font-size: var(--fs-xs); font-weight: 700;
             letter-spacing: 3px; text-transform: uppercase;
@@ -916,12 +917,12 @@
         .btn-submit span { position: relative; z-index: 2; }
         .btn-submit::before {
             content: ''; position: absolute; inset: 0;
-            background: var(--or);
+            background: var(--or-fonce);
             transform: translateY(100%);
             transition: transform 0.5s var(--ease-out-expo); z-index: 1;
         }
         .btn-submit:hover::before { transform: translateY(0); }
-        .btn-submit:hover { color: var(--navy-1); box-shadow: 0 15px 40px rgba(200,160,74,0.15); }
+        .btn-submit:hover { color: #FFFFFF; box-shadow: 0 15px 40px rgba(143,168,160,0.15); }
         .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
 
         .form-success { display: none; text-align: center; padding: 60px 30px; }

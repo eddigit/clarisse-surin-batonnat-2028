@@ -5,8 +5,8 @@
   "start_url": "/event.html",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0f1a2e",
-  "theme_color": "#0f1a2e",
+  "background_color": "#2B2F33",
+  "theme_color": "#2B2F33",
   "icons": [
     {
       "src": "favicon.svg",
