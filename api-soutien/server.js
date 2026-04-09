@@ -140,7 +140,7 @@ app.post('/api/soutien', async (req, res) => {
         const statutLabel = { avocat: 'Avocat(e)', non_avocat: 'Non-avocat(e)', autre: 'Autre' };
         const engagements = [];
         if (participation_campagne === 'oui') engagements.push('Participer a la campagne');
-        if (soutien_candidat === 'oui') engagements.push('Soutient Clarisse Surin');
+        if (soutien_candidat === 'oui') engagements.push('Soutien a Clarisse Surin');
         if (souhaite_partager_theme === 'oui') engagements.push('Souhaite proposer un theme');
 
         const emailSubject = `Nouveau soutien #${result.rows[0].id} — ${prenom} ${nom} (${statutLabel[statut] || statut || 'N/A'})`;
