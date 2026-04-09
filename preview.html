@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apercu — Batonnat 2028</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0f1a2e">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --navy: #0f1a2e;
+            --navy-light: #162240;
+            --or: #c8a04a;
+            --or-clair: #dbb95e;
+            --or-pale: rgba(200, 160, 74, 0.10);
+            --text-bright: #f0ebe2;
+            --text-muted: #8a8278;
+            --red: #c1483f;
+        }
+
+        html, body { height: 100%; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--navy);
+            color: var(--text-bright);
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Grain */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .gate {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .gate-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1.5rem;
+            opacity: 0.7;
+        }
+
+        .gate-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .gate-sub {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .gate-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .gate-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--text-bright);
+            background: var(--navy-light);
+            border: 1.5px solid rgba(200, 160, 74, 0.15);
+            border-radius: 8px;
+            outline: none;
+            text-align: center;
+            letter-spacing: 0.1em;
+            transition: border-color 0.2s;
+        }
+
+        .gate-input::placeholder {
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .gate-input:focus {
+            border-color: var(--or);
+        }
+
+        .gate-input.error {
+            border-color: var(--red);
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .gate-btn {
+            padding: 0.75rem 1.5rem;
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--navy);
+            background: var(--or);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .gate-btn:hover {
+            background: var(--or-clair);
+        }
+
+        .gate-btn:active {
+            transform: scale(0.98);
+        }
+
+        .gate-error {
+            font-size: 0.78rem;
+            color: var(--red);
+            min-height: 1.2em;
+        }
+
+        .gate-note {
+            margin-top: 2rem;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Preview frame */
+        .preview-frame {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+        }
+
+        .preview-frame.active {
+            display: block;
+        }
+
+        .preview-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 101;
+            background: var(--or);
+            color: var(--navy);
+            text-align: center;
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .preview-banner a {
+            color: var(--navy);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .preview-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            margin-top: 32px;
+            height: calc(100% - 32px);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PASSWORD GATE -->
+    <div class="gate" id="gate">
+        <svg class="gate-icon" viewBox="0 0 48 48" fill="none" stroke="#c8a04a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="8" y="22" width="32" height="22" rx="3"/>
+            <path d="M14 22V14a10 10 0 0 1 20 0v8"/>
+            <circle cx="24" cy="33" r="3" fill="#c8a04a" stroke="none"/>
+            <line x1="24" y1="36" x2="24" y2="39"/>
+        </svg>
+
+        <h1 class="gate-title">Apercu du site</h1>
+        <p class="gate-sub">Ce site est en cours de construction.<br>Entrez le code d'acces pour le consulter.</p>
+
+        <form class="gate-form" id="gateForm">
+            <input type="password" class="gate-input" id="gatePassword" placeholder="Code d'acces" autocomplete="off" autofocus>
+            <button type="submit" class="gate-btn">Acceder a l'apercu</button>
+            <div class="gate-error" id="gateError"></div>
+        </form>
+
+        <p class="gate-note">Apercu confidentiel reserve a l'equipe de campagne.<br>Ne pas diffuser ce lien.</p>
+    </div>
+
+    <!-- PREVIEW FRAME (shown after auth) -->
+    <div class="preview-frame" id="previewFrame">
+        <div class="preview-banner">
+            Apercu confidentiel — Site en attente de validation
+            <a id="closePreview">Fermer</a>
+        </div>
+        <iframe id="previewIframe" src="about:blank"></iframe>
+    </div>
+
+    <script>
+        // Password hash (SHA-256 of the password)
+        // Default password: RunForJustice2028
+        const VALID_HASH = 'ff06164b50820f78c29a0a51cffb45914df21ed29caf23c9a7d8836e5f8a140b';
+
+        async function sha256(text) {
+            const data = new TextEncoder().encode(text);
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        const gate = document.getElementById('gate');
+        const gateForm = document.getElementById('gateForm');
+        const gatePassword = document.getElementById('gatePassword');
+        const gateError = document.getElementById('gateError');
+        const previewFrame = document.getElementById('previewFrame');
+        const previewIframe = document.getElementById('previewIframe');
+        const closePreview = document.getElementById('closePreview');
+
+        // Check if already authenticated this session
+        if (sessionStorage.getItem('preview_auth') === 'ok') {
+            showPreview();
+        }
+
+        gateForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const pwd = gatePassword.value.trim();
+            if (!pwd) return;
+
+            const hash = await sha256(pwd);
+            if (hash === VALID_HASH) {
+                sessionStorage.setItem('preview_auth', 'ok');
+                gatePassword.classList.remove('error');
+                gateError.textContent = '';
+                showPreview();
+            } else {
+                gatePassword.classList.add('error');
+                gateError.textContent = 'Code incorrect';
+                setTimeout(() => gatePassword.classList.remove('error'), 500);
+            }
+        });
+
+        closePreview.addEventListener('click', function() {
+            sessionStorage.removeItem('preview_auth');
+            previewFrame.classList.remove('active');
+            gate.style.display = '';
+            previewIframe.src = 'about:blank';
+        });
+
+        function showPreview() {
+            gate.style.display = 'none';
+            previewFrame.classList.add('active');
+            previewIframe.src = 'campagne.html';
+        }
+    </script>
+
+</body>
+</html>
