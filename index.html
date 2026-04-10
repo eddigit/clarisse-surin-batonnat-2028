@@ -196,6 +196,42 @@
             }
         }
 
+        /* Discrete team access link */
+        .team-access {
+            position: fixed;
+            bottom: 1.2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            font-size: 0.68rem;
+            font-weight: 300;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            opacity: 0.55;
+            transition: opacity 0.25s ease, color 0.25s ease;
+            animation: textIn 0.8s ease 1.6s both;
+            white-space: nowrap;
+        }
+
+        .team-access:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        .team-access::before {
+            content: '·';
+            margin-right: 0.5rem;
+            opacity: 0.6;
+        }
+
+        .team-access::after {
+            content: '·';
+            margin-left: 0.5rem;
+            opacity: 0.6;
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
@@ -229,6 +265,8 @@
 
         <a href="run-for-justice.html" class="cta-link">Rejoindre le mouvement</a>
     </main>
+
+    <a href="preview.html" class="team-access" title="Acces equipe de campagne">Equipe de campagne</a>
 
 </body>
 </html>
