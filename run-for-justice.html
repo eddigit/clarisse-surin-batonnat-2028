@@ -6,12 +6,12 @@
     <title>Run for Justice — Clarisse Surin, Bâtonnat 2028</title>
     <meta name="description" content="Rejoignez le mouvement Run for Justice. Soutenez Clarisse Surin pour le Bâtonnat de Paris 2028.">
     <meta name="theme-color" content="#2B2F33">
-    <meta property="og:title" content="Run for Justice — Batonnat 2028">
-    <meta property="og:description" content="Soutenez Clarisse Surin pour le Batonnat de Paris 2028. Partagez votre engagement.">
+    <meta property="og:title" content="Run for Justice — Bâtonnat 2028">
+    <meta property="og:description" content="Soutenez Maître Clarisse Surin pour le Bâtonnat de Paris 2028. Partagez votre engagement.">
     <meta property="og:image" content="https://res.cloudinary.com/dniurvpzd/image/upload/v1769084034/Clarisse_Surin_image_hero_jm89nm.webp">
     <meta property="og:url" content="https://batonnat2028.com/run-for-justice.html">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Batonnat 2028">
+    <meta property="og:site_name" content="Bâtonnat 2028">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -521,6 +521,35 @@
         }
 
         /* ══════ SUBMIT BUTTON ══════ */
+        .form-consent {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+            margin: 1.25rem 0 0.75rem;
+            padding: 0.75rem 0.85rem;
+            background: rgba(143, 168, 160, 0.06);
+            border-left: 2px solid var(--accent);
+            border-radius: 4px;
+        }
+        .form-consent input[type="checkbox"] {
+            accent-color: var(--accent);
+            margin-top: 0.2rem;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        .form-consent label {
+            font-size: 0.78rem;
+            line-height: 1.55;
+            color: var(--text-muted, #5A5854);
+            cursor: pointer;
+        }
+        .form-consent a {
+            color: var(--accent-hover);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        .form-consent a:hover { color: var(--accent); }
+
         .submit-btn {
             width: 100%;
             padding: 0.9rem 1.5rem;
@@ -721,13 +750,13 @@
         <h1 class="main-title">Run for <em>Justice</em></h1>
         <p class="subtitle">
             Partagez vos informations, soutenez la campagne de Clarisse Surin
-            pour le Bâtonnat 2028 et proposez les thèmes qui vous tiennent à coeur.
+            pour le Bâtonnat 2028 et proposez les thèmes qui vous tiennent à cœur.
         </p>
 
         <!-- PROGRESS -->
         <div class="progress-container">
             <div class="progress-steps">
-                <span class="progress-step active" data-step="1">Identite</span>
+                <span class="progress-step active" data-step="1">Identité</span>
                 <span class="progress-step" data-step="2">Profession</span>
                 <span class="progress-step" data-step="3">Contact</span>
                 <span class="progress-step" data-step="4">Engagement</span>
@@ -744,12 +773,12 @@
 
             <!-- ERROR BANNER -->
             <div class="error-banner" id="errorBanner">
-                Une erreur est survenue. Veuillez reessayer.
+                Une erreur est survenue. Veuillez réessayer.
             </div>
 
             <!-- SECTION: IDENTITE -->
             <div class="form-section" data-section="1">
-                <div class="section-label">Votre identite</div>
+                <div class="section-label">Votre identité</div>
                 <div class="field-row">
                     <div class="field-group">
                         <label class="field-label" for="nom">Nom <span class="required">*</span></label>
@@ -757,7 +786,7 @@
                         <div class="field-error" id="nomError">Ce champ est requis</div>
                     </div>
                     <div class="field-group">
-                        <label class="field-label" for="prenom">Prenom <span class="required">*</span></label>
+                        <label class="field-label" for="prenom">Prénom <span class="required">*</span></label>
                         <input type="text" class="field-input" id="prenom" name="prenom" autocomplete="given-name" required>
                         <div class="field-error" id="prenomError">Ce champ est requis</div>
                     </div>
@@ -871,9 +900,15 @@
                 </div>
             </div>
 
+            <!-- RGPD CONSENT -->
+            <div class="form-consent">
+                <input type="checkbox" id="rgpd-rfj" name="rgpd" required>
+                <label for="rgpd-rfj">J'accepte que mes données soient utilisées dans le cadre de la campagne Clarisse Surin — Bâtonnat 2028. <a href="/mentions.html" target="_blank" rel="noopener">Voir la politique de données</a>.</label>
+            </div>
+
             <!-- SUBMIT -->
             <button type="submit" class="submit-btn" id="submitBtn">
-                <span class="btn-text">Envoyer ma reponse</span>
+                <span class="btn-text">Envoyer ma réponse</span>
                 <span class="btn-spinner"><div class="spinner"></div></span>
             </button>
         </form>
@@ -887,16 +922,16 @@
             </div>
             <h2 class="confirm-title">Merci pour votre engagement</h2>
             <p class="confirm-text">
-                Votre reponse a bien ete enregistree. L'equipe de campagne de Clarisse Surin
+                Votre réponse a bien été enregistrée. L'équipe de campagne de Clarisse Surin
                 vous recontactera prochainement.
             </p>
-            <button class="confirm-back" id="confirmBack">Soumettre une autre reponse</button>
+            <button class="confirm-back" id="confirmBack">Soumettre une autre réponse</button>
         </div>
 
         <!-- FOOTER -->
         <div class="form-footer" id="formFooter">
-            <p>Campagne Clarisse Surin &mdash; Batonnat de Paris 2028<br>
-            Vos donnees sont traitees conformement au RGPD.</p>
+            <p>Campagne Clarisse Surin &mdash; Bâtonnat de Paris 2028<br>
+            Vos données sont traitées conformément au RGPD. <a href="/mentions.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">Mentions légales</a></p>
         </div>
 
     </div>
