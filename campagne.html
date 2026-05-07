@@ -46,6 +46,11 @@
             --creme-chaud: #FAF8F4;
             --sable: #C3C6C8;
 
+            /* Warm accent — point of tension for narrative accents */
+            --accent-warm: #C4856B;
+            --accent-warm-soft: rgba(196, 133, 107, 0.4);
+            --accent-warm-deep: #A86E54;
+
             /* Text — light (for dark sections) */
             --text-bright: #F0EBE4;
             --text-body: #C0BAB0;
@@ -567,6 +572,7 @@
             display: inline-flex; align-items: center; gap: 16px;
         }
         .section-label::before { content: ''; width: 40px; height: 1px; background: var(--or); }
+        .section-label .num { color: var(--accent-warm); }
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
@@ -613,6 +619,43 @@
         .stagger.shown > *:nth-child(4) { transition-delay: 0.3s; }
         .stagger.shown > *:nth-child(5) { transition-delay: 0.4s; }
         .stagger.shown > * { opacity: 1; transform: translateY(0); }
+
+        /* ══════ MANIFESTE ══════ */
+        #manifeste { padding: clamp(5rem, 10vw, 8rem) 8vw; }
+        .manifeste-inner { max-width: 1100px; margin: 0 auto; }
+        .manifeste-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.75rem, 4.4vw, 3.4rem);
+            font-weight: 600;
+            line-height: 1.18;
+            letter-spacing: -0.015em;
+            color: var(--text-dark);
+            max-width: 920px;
+            margin: 24px 0 56px;
+        }
+        .manifeste-text > span { display: block; }
+        .manifeste-text > span:last-child {
+            color: var(--accent-warm, var(--or-fonce));
+            font-style: italic;
+        }
+        .manifeste-signature {
+            display: flex; align-items: center; gap: 20px;
+            color: var(--text-dark-body);
+        }
+        .manifeste-signature svg {
+            color: var(--or-fonce);
+            opacity: 0.65;
+        }
+        .manifeste-signature-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            letter-spacing: 0.01em;
+        }
+        @media (max-width: 720px) {
+            .manifeste-text { margin: 20px 0 40px; }
+            .manifeste-signature svg { width: 140px; height: 38px; }
+        }
 
         /* ══════ VISION ══════ */
         #vision {
@@ -746,10 +789,22 @@
             width: 48px; height: 48px;
             border: 1px solid var(--navy-border);
             display: flex; align-items: center; justify-content: center;
-            margin-bottom: 26px; font-size: 1.2rem;
-            transition: border-color 0.4s;
+            margin-bottom: 26px;
+            color: var(--or);
+            transition: border-color 0.4s, color 0.4s, background 0.4s;
         }
-        .eng-card:hover .icon { border-color: var(--or); }
+        .eng-card .icon svg {
+            width: 24px; height: 24px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .eng-card:hover .icon {
+            border-color: var(--or);
+            color: var(--accent-warm);
+        }
 
         .eng-card h3 {
             font-family: 'Cormorant Garamond', serif;
@@ -779,7 +834,7 @@
             line-height: 1.4; max-width: 800px; margin: 0 auto;
             position: relative; z-index: 1;
         }
-        .quote-symbol { font-size: 6rem; line-height: 0.5; color: var(--or-fonce); display: block; margin-bottom: 28px; opacity: 0.4; }
+        .quote-symbol { font-size: 6rem; line-height: 0.5; color: var(--accent-warm); display: block; margin-bottom: 28px; opacity: 0.55; }
         .citation-sig {
             font-family: 'JetBrains Mono', monospace;
             font-size: var(--fs-xs); color: var(--or);
@@ -789,39 +844,78 @@
         }
         .citation-sig::before, .citation-sig::after { content: ''; width: 30px; height: 1px; background: var(--or-fonce); }
 
-        /* ══════ TÉMOIGNAGES ══════ */
-        .temoignages-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 24px; margin-top: var(--s-xl);
+        /* ══════ TÉMOIGNAGES (éditoriaux verticaux) ══════ */
+        .temoignages-edito {
+            display: flex; flex-direction: column;
+            gap: var(--s-l);
+            margin-top: var(--s-xl);
+            max-width: 980px;
         }
-        .temoignage {
-            padding: 40px 30px;
-            border: 1px solid var(--navy-border);
-            background: var(--navy-card);
-            position: relative;
-            transition: all 0.5s var(--ease-out-expo);
+        .t-edito { position: relative; max-width: 760px; }
+        .t-edito[data-align="right"] {
+            margin-left: auto;
+            text-align: right;
         }
-        .temoignage:hover { border-color: var(--navy-border-hover); background: var(--navy-card-hover); box-shadow: 0 10px 40px rgba(0,0,0,0.15); }
-
-        .temoignage .t-quote {
+        .t-edito-quote {
             font-family: 'Cormorant Garamond', serif;
-            font-size: var(--fs-l); font-style: italic;
-            line-height: 1.5; margin-bottom: 28px;
+            font-size: clamp(1.3rem, 2.4vw, 1.85rem);
+            font-style: italic;
+            line-height: 1.45;
+            color: var(--text-bright);
+            margin: 0;
+            letter-spacing: -0.005em;
         }
-        .temoignage .t-quote::before {
-            content: '"'; font-size: 2.5rem; color: var(--or);
-            line-height: 1; display: block; margin-bottom: 12px;
-        }
-        .t-author { display: flex; align-items: center; gap: 14px; }
-        .t-avatar {
-            width: 40px; height: 40px; border-radius: 50%;
-            background: var(--navy-5);
-            display: flex; align-items: center; justify-content: center;
+        .t-edito-quote::before {
+            content: '"';
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85rem; font-weight: 700; color: var(--or);
+            font-size: 3.4rem;
+            line-height: 0;
+            color: var(--accent-warm);
+            opacity: 0.55;
+            margin-right: 4px;
+            vertical-align: -0.5em;
         }
-        .t-name { font-size: 0.85rem; font-weight: 600; }
-        .t-role { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
+        .t-edito-meta {
+            margin-top: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-xs);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+        }
+        .t-edito[data-align="left"] .t-edito-meta::before {
+            content: ''; width: 28px; height: 1px; background: var(--accent-warm-soft);
+        }
+        .t-edito[data-align="right"] .t-edito-meta::after {
+            content: ''; width: 28px; height: 1px; background: var(--accent-warm-soft);
+        }
+        .t-divider {
+            height: 1px;
+            width: 38%;
+            background: linear-gradient(90deg, transparent, var(--accent-warm-soft), transparent);
+            margin: 0 auto;
+            border: none;
+        }
+        .placeholder-content {
+            outline: 1px dashed rgba(193, 72, 63, 0.45);
+            outline-offset: 2px;
+            padding: 1px 6px;
+            border-radius: 2px;
+        }
+        @media (max-width: 720px) {
+            .t-edito[data-align="right"] {
+                text-align: left;
+                margin-left: 0;
+            }
+            .t-edito[data-align="right"] .t-edito-meta::after { display: none; }
+            .t-edito[data-align="right"] .t-edito-meta::before {
+                content: ''; width: 28px; height: 1px; background: var(--accent-warm-soft);
+            }
+            .t-divider { width: 60%; }
+        }
 
         /* ══════ SOUTIEN (CREAM SECTION) ══════ */
         #soutien { background: var(--creme); color: var(--text-dark); }
@@ -957,7 +1051,6 @@
         @media (max-width: 1024px) {
             #vision { grid-template-columns: 1fr; gap: 40px; }
             .parcours-grid { grid-template-columns: 1fr; gap: 0; }
-            .temoignages-grid { grid-template-columns: 1fr; }
             .soutien-layout { grid-template-columns: 1fr; }
             .hero-bottom-row { flex-direction: column; gap: 20px; align-items: flex-start; }
             .hero-photo-overlay { width: 60%; opacity: 0.04; }
@@ -1074,6 +1167,27 @@
 
     <div class="strip"></div>
 
+    <!-- ═══ MANIFESTE ═══ -->
+    <section id="manifeste" class="section--cream">
+        <div class="manifeste-inner">
+            <div class="section-label" data-reveal>Manifeste</div>
+            <!-- À VALIDER AVEC CLARISSE — wording placeholder -->
+            <p class="manifeste-text stagger" data-reveal>
+                <span>Le Barreau de Paris ne se défend pas en regardant en arrière.</span>
+                <span>Il se défend en marchant.</span>
+                <span>Ensemble. Plus vite. Plus juste.</span>
+            </p>
+            <div class="manifeste-signature" data-reveal>
+                <!-- Placeholder signature manuscrite — à remplacer par la signature SVG réelle de Clarisse -->
+                <svg viewBox="0 0 240 60" width="180" height="48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M5 38 Q18 12, 34 32 T 62 30 Q78 14, 96 34 T 124 28 Q140 10, 156 34 Q172 50, 192 26 T 230 32"
+                          stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+                </svg>
+                <span class="manifeste-signature-label">— Clarisse Surin</span>
+            </div>
+        </div>
+    </section>
+
     <!-- MARQUEE -->
     <div class="marquee-band" aria-hidden="true">
         <div class="marquee-inner">
@@ -1102,7 +1216,7 @@
         <div class="bg-photo" style="background-image:url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1920&q=80');opacity:0.05;filter:grayscale(30%) brightness(0.7);" aria-hidden="true"></div>
 
         <div style="position:relative;z-index:1;">
-            <div class="section-label" data-reveal>01 — Vision</div>
+            <div class="section-label" data-reveal><span class="num">01 —</span> Vision</div>
             <h2 class="section-title" data-reveal>
                 Un Barreau <span class="em">en&nbsp;mouvement</span>,
                 à l'image de celles et ceux qui le&nbsp;composent
@@ -1135,7 +1249,7 @@
 
     <!-- ═══ PARCOURS ═══ -->
     <section id="parcours" class="section section--navy-light">
-        <div class="section-label" data-reveal>02 — Parcours</div>
+        <div class="section-label" data-reveal><span class="num">02 —</span> Parcours</div>
         <h2 class="section-title" data-reveal>
             Une avocate de terrain,<br>forgée par l'<span class="em">engagement</span>
         </h2>
@@ -1165,7 +1279,7 @@
 
 
         <div class="eng-header">
-            <div class="section-label" data-reveal>03 — Starting Bloc</div>
+            <div class="section-label" data-reveal><span class="num">03 —</span> Starting Bloc</div>
             <h2 class="section-title" data-reveal>
                 Sur la ligne de départ :<br>nos <span class="em">engagements</span>
             </h2>
@@ -1177,27 +1291,37 @@
 
         <div class="eng-scroller" id="engScroller">
             <div class="eng-card">
-                <div class="icon">⚖️</div>
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M12 3v18M4 21h16M5 6l7-1 7 1M5 6l-3 7h6L5 6zM19 6l-3 7h6l-3-7z"/></svg>
+                </div>
                 <h3>Accès au droit renforcé</h3>
                 <p>Garantir que chaque justiciable puisse accéder à un avocat. Revaloriser l'aide juridictionnelle.</p>
             </div>
             <div class="eng-card">
-                <div class="icon">🏛️</div>
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M3 21h18M3 9h18M5 9v12M19 9v12M9 9v12M15 9v12M12 3l9 6H3l9-6z"/></svg>
+                </div>
                 <h3>Un Ordre transparent</h3>
                 <p>Ouvrir les comptes, publier les décisions, expliquer les choix. Confiance par la transparence.</p>
             </div>
             <div class="eng-card">
-                <div class="icon">💡</div>
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4.5 12.4V18h9v-3.6A7 7 0 0 0 12 2z"/></svg>
+                </div>
                 <h3>Innovation &amp; numérique</h3>
                 <p>Doter le Barreau d'outils modernes. Simplifier le quotidien de chaque cabinet.</p>
             </div>
             <div class="eng-card">
-                <div class="icon">🤝</div>
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5.5" cy="16" r="2.5"/><circle cx="18.5" cy="16" r="2.5"/><path d="M11 7.5L7 13.5M13 7.5L17 13.5M8 16h8"/></svg>
+                </div>
                 <h3>Solidarité confraternelle</h3>
                 <p>Lutter contre l'isolement, renforcer la prévoyance, créer des espaces d'entraide entre générations.</p>
             </div>
             <div class="eng-card">
-                <div class="icon">🌍</div>
+                <div class="icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a13.5 13.5 0 0 1 0 18 13.5 13.5 0 0 1 0-18z"/></svg>
+                </div>
                 <h3>Rayonnement international</h3>
                 <p>Faire du Barreau de Paris un leader sur la scène juridique mondiale.</p>
             </div>
@@ -1222,38 +1346,32 @@
         <div class="bg-photo" style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1920&q=80');opacity:0.045;filter:grayscale(20%) brightness(0.7);" aria-hidden="true"></div>
 
         <div style="position:relative;z-index:1;">
-            <div class="section-label" data-reveal>04 — Ils soutiennent</div>
+            <div class="section-label" data-reveal><span class="num">04 —</span> Ils soutiennent</div>
             <h2 class="section-title" data-reveal>Des voix qui <span class="em">comptent</span></h2>
 
-            <div class="temoignages-grid stagger" data-reveal>
-                <div class="temoignage">
-                    <div class="t-quote">Clarisse incarne ce dont le Barreau a besoin : de l'écoute, du courage et une vraie vision pour les jeunes avocats.</div>
-                    <div class="t-author">
-                        <div class="t-avatar">ML</div>
-                        <div><div class="t-name">Maître L.</div><div class="t-role">Collaboratrice — Droit social</div></div>
-                    </div>
-                </div>
-                <div class="temoignage">
-                    <div class="t-quote">Enfin une candidate qui parle de transparence et qui le prouve par ses actes. Mon soutien est total.</div>
-                    <div class="t-author">
-                        <div class="t-avatar">PD</div>
-                        <div><div class="t-name">Maître D.</div><div class="t-role">Associé — Droit des affaires</div></div>
-                    </div>
-                </div>
-                <div class="temoignage">
-                    <div class="t-quote">Sa connaissance du terrain et son engagement pour la confraternité font d'elle la candidate naturelle.</div>
-                    <div class="t-author">
-                        <div class="t-avatar">SB</div>
-                        <div><div class="t-name">Maître B.</div><div class="t-role">Avocat individuel — Droit pénal</div></div>
-                    </div>
-                </div>
+            <!-- À VALIDER AVEC CLARISSE — placeholders identité témoins -->
+            <div class="temoignages-edito stagger" data-reveal>
+                <article class="t-edito" data-align="left">
+                    <p class="t-edito-quote">Clarisse incarne ce dont le Barreau a besoin : de l'écoute, du courage et une vraie vision pour les jeunes avocats.</p>
+                    <div class="t-edito-meta"><span class="placeholder-content">Maître [À valider] · Collaboratrice · Droit social</span></div>
+                </article>
+                <hr class="t-divider">
+                <article class="t-edito" data-align="right">
+                    <p class="t-edito-quote">Enfin une candidate qui parle de transparence et qui le prouve par ses actes. Mon soutien est total.</p>
+                    <div class="t-edito-meta"><span class="placeholder-content">Maître [À valider] · Associé · Droit des affaires</span></div>
+                </article>
+                <hr class="t-divider">
+                <article class="t-edito" data-align="left">
+                    <p class="t-edito-quote">Sa connaissance du terrain et son engagement pour la confraternité font d'elle la candidate naturelle.</p>
+                    <div class="t-edito-meta"><span class="placeholder-content">Maître [À valider] · Avocat individuel · Droit pénal</span></div>
+                </article>
             </div>
         </div>
     </section>
 
     <!-- ═══ SOUTIEN (CREAM) ═══ -->
     <section id="soutien" class="section">
-        <div class="section-label" data-reveal>05 — Soutien</div>
+        <div class="section-label" data-reveal><span class="num">05 —</span> Soutien</div>
         <div class="soutien-layout">
             <div class="soutien-left">
                 <h2 class="section-title" data-reveal>
@@ -1305,7 +1423,7 @@
                     <div class="fg"><label for="message">Un mot pour Clarisse <span style="text-transform:none;letter-spacing:0;font-weight:400;color:var(--text-dim)">(facultatif)</span></label><textarea id="message" name="message" placeholder="Pourquoi soutenez-vous cette candidature ?"></textarea></div>
                     <div class="form-consent">
                         <input type="checkbox" id="rgpd" name="rgpd" required>
-                        <label for="rgpd">J'accepte que mes données soient utilisées dans le cadre de la campagne Clarisse Surin — Bâtonnat 2028. <a href="#">Politique de confidentialité</a></label>
+                        <label for="rgpd">J'accepte que mes données soient utilisées dans le cadre de la campagne Clarisse Surin — Bâtonnat 2028. <a href="/mentions.html" target="_blank" rel="noopener">Voir la politique de données</a>.</label>
                     </div>
                     <button type="submit" class="btn-submit" id="submitBtn"><span>Prendre position →</span></button>
                 </form>
@@ -1328,6 +1446,7 @@
                 <a href="#soutien">Soutenir</a>
                 <a href="soutiens.html">Mur des soutiens</a>
                 <a href="https://www.cls-avocat.com" target="_blank" rel="noopener">Cabinet CLS</a>
+                <a href="/mentions.html">Mentions légales</a>
             </div>
         </div>
         <div class="footer-copy">© 2026 Campagne Clarisse Surin — Bâtonnat de Paris 2028. Tous droits réservés. — Design &amp; développement <a href="https://coachdigitalparis.com" target="_blank" rel="noopener" style="color:var(--or-muted);text-decoration:none;border-bottom:1px solid var(--or-fonce);transition:color 0.3s;" onmouseover="this.style.color='var(--or)'" onmouseout="this.style.color='var(--or-muted)'">G.&nbsp;Korzec</a></div>
@@ -1409,7 +1528,7 @@
             document.addEventListener('mousedown', () => ring.classList.add('pressed'));
             document.addEventListener('mouseup', () => ring.classList.remove('pressed'));
             (function loop() { cx+=(mx-cx)*0.09; cy+=(my-cy)*0.09; ring.style.left=cx+'px'; ring.style.top=cy+'px'; requestAnimationFrame(loop); })();
-            document.querySelectorAll('a,button,.v-card,.p-card,.eng-card,.temoignage,input,select,textarea').forEach(el => {
+            document.querySelectorAll('a,button,.v-card,.p-card,.eng-card,.t-edito,input,select,textarea').forEach(el => {
                 el.addEventListener('mouseenter', () => ring.classList.add('active'));
                 el.addEventListener('mouseleave', () => ring.classList.remove('active'));
             });
@@ -1504,7 +1623,7 @@
         }
 
         /* ══════ TILT EFFECT ON CARDS ══════ */
-        document.querySelectorAll('.v-card, .p-card, .temoignage').forEach(card => {
+        document.querySelectorAll('.v-card, .p-card').forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const r = card.getBoundingClientRect();
                 const x = (e.clientX - r.left) / r.width - 0.5;
