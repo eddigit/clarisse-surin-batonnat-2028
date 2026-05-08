@@ -5,34 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nos Soutiens — Clarisse Surin, Bâtonnat 2028</title>
     <meta name="description" content="Ils soutiennent Clarisse Surin pour le Bâtonnat de Paris 2028. Rejoignez le mouvement.">
-    <meta name="theme-color" content="#181C24">
+    <meta name="theme-color" content="#161616">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
     <style>
-        :root { /* Palette « Encre & Limestone » — bleu mairie de Paris + limestone Haussmann + bordeaux Sénat éteint, refonte 2026-05-07. Noms de variables conservés (--or, --navy-*), valeurs migrées. */
-            --dark: #181C24;
-            --dark-mid: #20242D;
-            --bg: #E5DFD3;
-            --bg-light: #D8E2EE;
-            --accent: #1F4E8C;
-            --accent-hover: #163C6E;
-            --accent-pale: rgba(31, 78, 140, 0.15);
-            --accent-glow: rgba(31, 78, 140, 0.12);
-            --card-bg: #F4EFE5;
-            --card-bg-hover: #FAF6EC;
-            --border: #D4CDB8;
-            --border-hover: rgba(31, 78, 140, 0.35);
-            --text-main: #181C24;
-            --text-body: #6B6862;
-            --text-muted: #8A8680;
-            --text-dim: #6B6862;
-            --text-dark: #181C24;
-            --text-dark-body: #6B6862;
-            --creme: #F4EFE5;
-            --creme-chaud: #F8F2E6;
-            --sable: #D4CDB8;
+        :root { /* Palette officielle République Française (DSFR — Système de Design de l'État, v1.14) — refonte 2026-05-08. Bleu France #000091, Rouge Marianne #e1000f, grey scale officielle. Source : https://www.systeme-de-design.gouv.fr/. Noms de variables (--or, --navy-*) conservés. */
+            --dark: #161616;
+            --dark-mid: #1e1e1e;
+            --bg: #FFFFFF;
+            --bg-light: #e3e3fd;
+            --accent: #000091;
+            --accent-hover: #1212ff;
+            --accent-pale: rgba(0, 0, 145, 0.15);
+            --accent-glow: rgba(0, 0, 145, 0.12);
+            --card-bg: #f6f6f6;
+            --card-bg-hover: #ededed;
+            --border: #e5e5e5;
+            --border-hover: rgba(0, 0, 145, 0.35);
+            --text-main: #161616;
+            --text-body: #3a3a3a;
+            --text-muted: #929292;
+            --text-dim: #3a3a3a;
+            --text-dark: #161616;
+            --text-dark-body: #3a3a3a;
+            --creme: #f6f6f6;
+            --creme-chaud: #FFFFFF;
+            --sable: #e5e5e5;
             --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
             --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
         }
@@ -63,7 +63,7 @@
         nav {
             padding: 22px 5vw;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(24, 28, 36, 0.95);
+            background: rgba(22, 22, 22, 0.95);
             backdrop-filter: blur(40px) saturate(1.3);
             -webkit-backdrop-filter: blur(40px) saturate(1.3);
             border-bottom: 1px solid var(--border);
@@ -108,7 +108,7 @@
         }
         .page-header::before {
             content: ''; position: absolute; inset: 0;
-            background: radial-gradient(ellipse at center top, rgba(31, 78, 140,0.1), transparent 60%);
+            background: radial-gradient(ellipse at center top, rgba(0, 0, 145,0.1), transparent 60%);
             pointer-events: none;
         }
         /* Background starting-bloc */
@@ -193,7 +193,7 @@
         .soutien-card:hover {
             border-color: var(--border-hover);
             transform: translateY(-4px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.08), 0 0 30px rgba(31, 78, 140,0.08);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08), 0 0 30px rgba(0, 0, 145,0.08);
         }
         .soutien-card::after {
             content: ''; position: absolute; left: 0; top: 0;
@@ -320,7 +320,7 @@
             outline: none; transition: border-color 0.3s, box-shadow 0.3s;
         }
         .fg input:focus, .fg select:focus, .fg textarea:focus {
-            border-color: var(--accent); box-shadow: 0 0 0 3px rgba(31, 78, 140,0.12);
+            border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 0, 145,0.12);
         }
         .fg input::placeholder, .fg textarea::placeholder { color: var(--text-dim); font-size: 0.82rem; }
         .fg textarea { resize: vertical; min-height: 120px; }
@@ -353,7 +353,7 @@
             transition: transform 0.5s var(--ease-out-expo); z-index: 1;
         }
         .btn-submit:hover::before { transform: translateY(0); }
-        .btn-submit:hover { color: #FFFFFF; box-shadow: 0 15px 40px rgba(31, 78, 140,0.2); }
+        .btn-submit:hover { color: #FFFFFF; box-shadow: 0 15px 40px rgba(0, 0, 145,0.2); }
         .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
 
         .form-success { display: none; text-align: center; padding: 60px 30px; }
@@ -379,7 +379,7 @@
             content: ''; position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             width: 700px; height: 400px;
-            background: radial-gradient(ellipse, rgba(31, 78, 140,0.1), transparent 65%);
+            background: radial-gradient(ellipse, rgba(0, 0, 145,0.1), transparent 65%);
             pointer-events: none;
         }
         .cta-band h2 {
@@ -408,7 +408,7 @@
             z-index: 1; transition: left 0.7s var(--ease-out-expo);
         }
         .btn-primary:hover::before { left: 150%; }
-        .btn-primary:hover { box-shadow: 0 20px 60px rgba(31, 78, 140,0.3); transform: translateY(-2px); }
+        .btn-primary:hover { box-shadow: 0 20px 60px rgba(0, 0, 145,0.3); transform: translateY(-2px); }
 
         /* ══════ FOOTER ══════ */
         footer {

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Run for Justice — Clarisse Surin, Bâtonnat 2028</title>
     <meta name="description" content="Rejoignez le mouvement Run for Justice. Soutenez Clarisse Surin pour le Bâtonnat de Paris 2028.">
-    <meta name="theme-color" content="#181C24">
+    <meta name="theme-color" content="#161616">
     <meta property="og:title" content="Run for Justice — Bâtonnat 2028">
     <meta property="og:description" content="Soutenez Maître Clarisse Surin pour le Bâtonnat de Paris 2028. Partagez votre engagement.">
     <meta property="og:image" content="https://res.cloudinary.com/dniurvpzd/image/upload/v1769084034/Clarisse_Surin_image_hero_jm89nm.webp">
@@ -22,15 +22,15 @@
            RUN FOR JUSTICE — DESIGN SYSTEM
            Institutional green + warm red
            ══════════════════════════════════════════ */
-        :root { /* Palette « Encre & Limestone » — bleu mairie de Paris + limestone Haussmann + bordeaux Sénat éteint, refonte 2026-05-07. Noms de variables conservés (--or, --navy-*), valeurs migrées. */
-            --bg: #E5DFD3;
-            --card: #F4EFE5;
-            --text-main: #181C24;
-            --text-secondary: #6B6862;
-            --border: #D4CDB8;
-            --accent: #1F4E8C;
-            --accent-soft: rgba(31, 78, 140, 0.2);
-            --accent-hover: #163C6E;
+        :root { /* Palette officielle République Française (DSFR — Système de Design de l'État, v1.14) — refonte 2026-05-08. Bleu France #000091, Rouge Marianne #e1000f, grey scale officielle. Source : https://www.systeme-de-design.gouv.fr/. Noms de variables (--or, --navy-*) conservés. */
+            --bg: #FFFFFF;
+            --card: #f6f6f6;
+            --text-main: #161616;
+            --text-secondary: #3a3a3a;
+            --border: #e5e5e5;
+            --accent: #000091;
+            --accent-soft: rgba(0, 0, 145, 0.2);
+            --accent-hover: #1212ff;
             --red: #C1483F;
             --red-soft: #F4D2CB;
             --white: #FFFFFF;
@@ -527,7 +527,7 @@
             align-items: flex-start;
             margin: 1.25rem 0 0.75rem;
             padding: 0.75rem 0.85rem;
-            background: rgba(31, 78, 140, 0.06);
+            background: rgba(0, 0, 145, 0.06);
             border-left: 2px solid var(--accent);
             border-radius: 4px;
         }
@@ -540,7 +540,7 @@
         .form-consent label {
             font-size: 0.78rem;
             line-height: 1.55;
-            color: var(--text-muted, #5A5650);
+            color: var(--text-muted, #929292);
             cursor: pointer;
         }
         .form-consent a {
@@ -569,7 +569,7 @@
 
         .submit-btn:hover:not(:disabled) {
             background: var(--accent-hover);
-            box-shadow: 0 2px 8px rgba(31, 78, 140, 0.3);
+            box-shadow: 0 2px 8px rgba(0, 0, 145, 0.3);
         }
 
         .submit-btn:active:not(:disabled) {

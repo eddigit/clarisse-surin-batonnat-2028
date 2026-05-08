@@ -1,2 +1,5 @@
 node_modules/
 .env
+
+# Photos uploadées via formulaire (RGPD — ne jamais commit)
+api-soutien/uploads/
