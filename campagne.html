@@ -590,9 +590,13 @@
         .gold-rule { width: 50px; height: 1px; background: linear-gradient(90deg, var(--or), transparent); border: none; margin: 24px 0; }
 
         /* Navy section (default) */
-        .section--navy { background: var(--navy-2); }
+        .section--navy { background: #FFFFFF; color: var(--text-dark); }
         .section--navy-deep { background: var(--navy-1); }
-        .section--navy-light { background: var(--navy-3); }
+        .section--navy-light { background: var(--creme); color: var(--text-dark); }
+        .section--navy .section-text,
+        .section--navy-light .section-text { color: var(--text-dark-body); }
+        .section--navy .section-title .em,
+        .section--navy-light .section-title .em { color: var(--or-fonce); }
 
         /* Cream section */
         .section--cream {
@@ -668,8 +672,8 @@
 
         .v-card {
             padding: 34px 30px;
-            background: var(--navy-card);
-            border: 1px solid var(--navy-border);
+            background: #FFFFFF;
+            border: 1px solid var(--sable);
             position: relative; overflow: hidden; cursor: default;
             transition: all 0.5s var(--ease-out-expo);
         }
@@ -683,9 +687,9 @@
         .v-card:hover::before { transform: scaleY(1); }
         .v-card:hover {
             transform: translateX(8px) translateY(-2px);
-            border-color: var(--navy-border-hover);
-            background: var(--navy-card-hover);
-            box-shadow: 10px 10px 40px rgba(0,0,0,0.15), 0 0 30px rgba(0, 0, 145,0.04);
+            border-color: var(--or);
+            background: var(--creme);
+            box-shadow: 10px 10px 40px rgba(0,0,0,0.08), 0 0 30px rgba(0, 0, 145,0.06);
         }
         .v-card .num {
             font-family: 'JetBrains Mono', monospace;
@@ -695,20 +699,20 @@
         .v-card h3 {
             font-family: 'Cormorant Garamond', serif;
             font-size: var(--fs-l); font-weight: 600;
-            margin-bottom: 8px; color: var(--text-bright);
+            margin-bottom: 8px; color: var(--text-dark);
         }
-        .v-card p { font-size: var(--fs-s); color: var(--text-body); line-height: 1.75; }
+        .v-card p { font-size: var(--fs-s); color: var(--text-dark-body); line-height: 1.75; }
 
         /* ══════ PARCOURS ══════ */
         .parcours-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1px; margin-top: var(--s-xl);
-            background: var(--navy-4);
+            background: var(--sable);
         }
 
         .p-card {
-            background: var(--navy-3);
+            background: #FFFFFF;
             padding: 50px 36px;
             position: relative; overflow: hidden; cursor: default;
             transition: all 0.5s var(--ease-out-expo);
@@ -721,11 +725,11 @@
             transition: transform 0.7s var(--ease-out-expo);
         }
         .p-card:hover::after { transform: scaleX(1); }
-        .p-card:hover { background: var(--navy-4); box-shadow: inset 0 -2px 30px rgba(0, 0, 145,0.03); }
+        .p-card:hover { background: var(--creme); box-shadow: inset 0 -2px 30px rgba(0, 0, 145,0.05); }
 
         .p-card .tag {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.5rem; color: var(--or-clair);
+            font-size: 0.5rem; color: var(--or);
             letter-spacing: 4px; text-transform: uppercase;
             margin-bottom: 20px; display: block;
         }
@@ -733,13 +737,15 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.3rem; font-weight: 600;
             margin-bottom: 12px; line-height: 1.25;
+            color: var(--text-dark);
         }
-        .p-card p { font-size: var(--fs-s); color: var(--text-body); line-height: 1.8; }
+        .p-card p { font-size: var(--fs-s); color: var(--text-dark-body); line-height: 1.8; }
 
         /* ══════ ENGAGEMENTS ══════ */
         #engagements-wrap {
             position: relative; overflow: hidden;
-            background: var(--navy-2);
+            background: var(--creme);
+            color: var(--text-dark);
         }
         #engagements-wrap::before {
             content: '';
@@ -772,8 +778,8 @@
             flex: 0 0 min(360px, 80vw);
             scroll-snap-align: start;
             padding: 44px 34px;
-            background: var(--navy-card);
-            border: 1px solid var(--navy-border);
+            background: #FFFFFF;
+            border: 1px solid var(--sable);
             position: relative; overflow: hidden;
             transition: all 0.5s var(--ease-out-expo);
         }
@@ -783,7 +789,7 @@
             opacity: 0; transition: opacity 0.5s; pointer-events: none;
         }
         .eng-card:hover::before { opacity: 1; }
-        .eng-card:hover { border-color: var(--navy-border-hover); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+        .eng-card:hover { border-color: var(--or); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); }
 
         .eng-card .icon {
             width: 48px; height: 48px;
@@ -809,10 +815,11 @@
         .eng-card h3 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.3rem; font-weight: 600; margin-bottom: 12px;
+            color: var(--text-dark);
         }
-        .eng-card p { font-size: var(--fs-s); color: var(--text-body); line-height: 1.8; }
+        .eng-card p { font-size: var(--fs-s); color: var(--text-dark-body); line-height: 1.8; }
 
-        .scroll-prog-bar { width: 120px; height: 2px; background: var(--navy-4); margin: -40px 8vw 40px; position: relative; overflow: hidden; z-index: 1; }
+        .scroll-prog-bar { width: 120px; height: 2px; background: var(--sable); margin: -40px 8vw 40px; position: relative; overflow: hidden; z-index: 1; }
         .scroll-prog-fill { height: 100%; width: 30%; background: var(--or); transition: transform 0.15s ease; }
 
         /* ══════ CITATION ══════ */
@@ -861,7 +868,7 @@
             font-size: clamp(1.3rem, 2.4vw, 1.85rem);
             font-style: italic;
             line-height: 1.45;
-            color: var(--text-bright);
+            color: var(--text-dark);
             margin: 0;
             letter-spacing: -0.005em;
         }
