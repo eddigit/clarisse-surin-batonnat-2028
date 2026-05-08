@@ -372,37 +372,54 @@
         .mobile-nav.open a:nth-child(3) { transition-delay: .35s; }
         .mobile-nav.open a:nth-child(4) { transition-delay: .45s; }
 
-        /* ══════ HERO ══════ */
+        /* ══════ HERO — split éditorial (texte gauche / portrait droit) ══════ */
         #hero {
             position: relative; height: 100vh; height: 100dvh;
-            min-height: 700px; overflow: hidden; background: var(--navy-1);
+            min-height: 700px; overflow: hidden;
+            background: var(--navy-1);
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
         }
 
-        .hero-img-wrap { position: absolute; inset: 0; z-index: 1; }
+        .hero-img-wrap {
+            position: relative;
+            grid-column: 2;
+            z-index: 1;
+            overflow: hidden;
+            background: var(--creme);
+        }
         .hero-img-wrap img {
             width: 100%; height: 100%;
-            object-fit: cover; object-position: center 10%;
-            filter: contrast(1.05) saturate(0.95);
-            transform: scale(1.06);
+            object-fit: cover; object-position: center 18%;
+            filter: contrast(1.04) saturate(1);
+            transform: scale(1.05);
             transition: transform 14s ease-out;
         }
         .hero-img-wrap.loaded img { transform: scale(1); }
         .hero-img-wrap::after {
             content: ''; position: absolute; inset: 0;
-            background:
-                linear-gradient(90deg, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.85) 28%, rgba(255,255,255,0.35) 55%, rgba(255,255,255,0) 80%),
-                linear-gradient(180deg, transparent 0%, transparent 80%, rgba(255,255,255,0.6) 100%);
+            background: linear-gradient(90deg, rgba(255,255,255,0.18) 0%, transparent 18%);
+            pointer-events: none;
             z-index: 1;
         }
 
-        /* Hero background photo overlay (Tour Eiffel) */
         .hero-photo-overlay { display: none; }
 
         .hero-inner {
             position: relative; z-index: 5;
+            grid-column: 1;
             height: 100%;
-            display: flex; flex-direction: column; justify-content: flex-end;
-            padding: 0 8vw var(--s-xl);
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 0 6vw 0 8vw;
+            background: var(--navy-1);
+        }
+        .hero-inner::after {
+            content: '';
+            position: absolute;
+            top: 0; right: -1px; bottom: 0;
+            width: 1px;
+            background: linear-gradient(180deg, transparent, var(--navy-border) 20%, var(--navy-border) 80%, transparent);
+            z-index: 2;
         }
 
         .hero-eyebrow {
@@ -443,7 +460,7 @@
         .hero-subtitle {
             font-family: 'Cormorant Garamond', serif;
             font-size: var(--fs-xl); font-weight: 400; font-style: italic;
-            color: var(--or-pale); margin-bottom: 20px;
+            color: var(--or); margin-bottom: 20px;
             opacity: 0; transform: translateY(30px);
         }
         .hero-subtitle.on { animation: fadeUp .9s var(--ease-out-expo) forwards; }
@@ -1049,7 +1066,19 @@
             .parcours-grid { grid-template-columns: 1fr; gap: 0; }
             .soutien-layout { grid-template-columns: 1fr; }
             .hero-bottom-row { flex-direction: column; gap: 20px; align-items: flex-start; }
-            .hero-photo-overlay { width: 60%; opacity: 0.04; }
+            #hero {
+                grid-template-columns: 1fr;
+                grid-template-rows: 42vh minmax(0, 1fr);
+                min-height: 100vh;
+            }
+            .hero-img-wrap { grid-column: 1; grid-row: 1; }
+            .hero-img-wrap img { object-position: center 22%; }
+            .hero-inner {
+                grid-column: 1; grid-row: 2;
+                padding: 50px 6vw;
+                justify-content: flex-start;
+            }
+            .hero-inner::after { display: none; }
         }
         @media (max-width: 768px) {
             nav { padding: 18px 5vw; }
@@ -1064,7 +1093,6 @@
             .footer-links { flex-wrap: wrap; justify-content: center; }
             .soutien-metrics { flex-wrap: wrap; gap: 30px; }
             .hero-counter-block { display: none; }
-            .hero-photo-overlay { opacity: 0.04; }
         }
     </style>
 </head>
