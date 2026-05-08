@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Run for Justice — Clarisse Surin, Bâtonnat 2028</title>
     <meta name="description" content="Rejoignez le mouvement Run for Justice. Soutenez Clarisse Surin pour le Bâtonnat de Paris 2028.">
-    <meta name="theme-color" content="#2B2F33">
+    <meta name="theme-color" content="#181C24">
     <meta property="og:title" content="Run for Justice — Bâtonnat 2028">
     <meta property="og:description" content="Soutenez Maître Clarisse Surin pour le Bâtonnat de Paris 2028. Partagez votre engagement.">
     <meta property="og:image" content="https://res.cloudinary.com/dniurvpzd/image/upload/v1769084034/Clarisse_Surin_image_hero_jm89nm.webp">
@@ -22,15 +22,15 @@
            RUN FOR JUSTICE — DESIGN SYSTEM
            Institutional green + warm red
            ══════════════════════════════════════════ */
-        :root {
-            --bg: #B7C5C0;
-            --card: #F5F3EF;
-            --text-main: #2B2F33;
-            --text-secondary: #74716D;
-            --border: #C3C6C8;
-            --accent: #8FA8A0;
-            --accent-soft: rgba(143, 168, 160, 0.2);
-            --accent-hover: #7A958D;
+        :root { /* Palette « Encre & Limestone » — bleu mairie de Paris + limestone Haussmann + bordeaux Sénat éteint, refonte 2026-05-07. Noms de variables conservés (--or, --navy-*), valeurs migrées. */
+            --bg: #E5DFD3;
+            --card: #F4EFE5;
+            --text-main: #181C24;
+            --text-secondary: #6B6862;
+            --border: #D4CDB8;
+            --accent: #1F4E8C;
+            --accent-soft: rgba(31, 78, 140, 0.2);
+            --accent-hover: #163C6E;
             --red: #C1483F;
             --red-soft: #F4D2CB;
             --white: #FFFFFF;
@@ -527,7 +527,7 @@
             align-items: flex-start;
             margin: 1.25rem 0 0.75rem;
             padding: 0.75rem 0.85rem;
-            background: rgba(143, 168, 160, 0.06);
+            background: rgba(31, 78, 140, 0.06);
             border-left: 2px solid var(--accent);
             border-radius: 4px;
         }
@@ -540,7 +540,7 @@
         .form-consent label {
             font-size: 0.78rem;
             line-height: 1.55;
-            color: var(--text-muted, #5A5854);
+            color: var(--text-muted, #5A5650);
             cursor: pointer;
         }
         .form-consent a {
@@ -569,7 +569,7 @@
 
         .submit-btn:hover:not(:disabled) {
             background: var(--accent-hover);
-            box-shadow: 0 2px 8px rgba(143, 168, 160, 0.3);
+            box-shadow: 0 2px 8px rgba(31, 78, 140, 0.3);
         }
 
         .submit-btn:active:not(:disabled) {
