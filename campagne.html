@@ -408,57 +408,42 @@
         .hero-magazine-strip .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--or); }
         .hero-magazine-strip .spacer { flex: 1; }
 
-        /* Photo cadrée éditoriale, NB + duotone bleu très subtle */
+        /* Portrait écusson — couleurs naturelles, pas de filtre dégradant */
         .hero-img-wrap {
             position: absolute;
-            right: clamp(40px, 8vw, 130px);
+            right: clamp(60px, 9vw, 150px);
             top: 50%;
-            transform: translateY(-46%);
+            transform: translateY(-52%);
             z-index: 3;
-            width: clamp(260px, 26vw, 380px);
-            aspect-ratio: 4 / 5;
+            width: clamp(240px, 24vw, 340px);
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
             overflow: hidden;
             box-shadow:
-                0 40px 90px rgba(0, 0, 0, 0.14),
-                0 1px 0 rgba(0, 0, 0, 0.04);
+                0 30px 70px rgba(0, 0, 0, 0.14),
+                0 0 0 7px #f4efe5,
+                0 0 0 8px rgba(0, 0, 145, 0.18);
             opacity: 0; animation: fadeUp 1.4s var(--ease-out-expo) forwards 0.8s;
         }
         .hero-img-wrap img {
             width: 100%; height: 100%;
-            object-fit: cover; object-position: center 14%;
-            filter: grayscale(100%) contrast(1.06) brightness(1);
+            object-fit: cover; object-position: center 22%;
+            filter: contrast(1.03) saturate(1.05);
             transform: scale(1.04);
             transition: transform 14s ease-out;
         }
         .hero-img-wrap.loaded img { transform: scale(1); }
-        /* Couche duotone bleu France discrète sur la photo NB */
-        .hero-img-wrap::after {
-            content: '';
-            position: absolute; inset: 0;
-            background: var(--or);
-            mix-blend-mode: multiply;
-            opacity: 0.07;
-            pointer-events: none;
-        }
-        /* Coin éditorial (équerre dorée) en haut à gauche de la photo */
-        .hero-img-wrap::before {
-            content: '';
-            position: absolute;
-            top: -10px; left: -10px;
-            width: 56px; height: 56px;
-            border-top: 1px solid var(--or);
-            border-left: 1px solid var(--or);
-            z-index: 4;
-        }
+        .hero-img-wrap::after { display: none; }
+        .hero-img-wrap::before { display: none; }
 
-        /* Caption sous la photo — type légende presse */
+        /* Caption sous l'écusson */
         .hero-img-caption {
             position: absolute;
-            right: clamp(40px, 8vw, 130px);
-            top: calc(50% + clamp(170px, 17vw, 250px));
+            right: clamp(60px, 9vw, 150px);
+            top: calc(50% + clamp(140px, 14vw, 200px));
             z-index: 4;
-            width: clamp(260px, 26vw, 380px);
-            text-align: right;
+            width: clamp(240px, 24vw, 340px);
+            text-align: center;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.58rem;
             letter-spacing: 3px; text-transform: uppercase;
@@ -1229,7 +1214,7 @@
         </div>
 
         <div class="hero-img-wrap" id="heroImage">
-            <img src="https://res.cloudinary.com/dniurvpzd/image/upload/v1769084034/Clarisse_Surin_image_hero_jm89nm.webp"
+            <img src="https://res.cloudinary.com/dniurvpzd/image/upload/v1775796941/Maitre_clarisse_surin_p0swcq.jpg"
                  alt="Maître Clarisse Surin" loading="eager" fetchpriority="high">
         </div>
         <div class="hero-img-caption" aria-hidden="true">
